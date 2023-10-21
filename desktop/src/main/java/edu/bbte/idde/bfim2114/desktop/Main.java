@@ -1,72 +1,40 @@
 package edu.bbte.idde.bfim2114.desktop;
 
-import edu.bbte.idde.bfim2114.backend.DataCrudOperations;
-import edu.bbte.idde.bfim2114.backend.DataEntity;
+import edu.bbte.idde.bfim2114.backend.HardwareCrudOperations;
+import edu.bbte.idde.bfim2114.backend.HardwarePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
 public class Main {
-    private static final DataCrudOperations operations = new DataCrudOperations();
+    private static final HardwareCrudOperations operations = new HardwareCrudOperations();
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
-            LOGGER.info("Select an option:");
-            LOGGER.info("1. Create");
-            LOGGER.info("2. Read");
-            LOGGER.info("3. Read All");
-            LOGGER.info("4. Update");
-            LOGGER.info("5. Delete");
-            LOGGER.info("6. Exit");
-
+            displayMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
-            String value;
-            long id;
 
             switch (choice) {
                 case 1:
-                    LOGGER.info("Enter value: ");
-                    value = scanner.nextLine();
-                    DataEntity entity = new DataEntity(null, value);
-                    operations.create(entity);
-                    LOGGER.info("Data created with ID: {}", entity.getId());
+                    createHardwarePart();
                     break;
                 case 2:
-                    LOGGER.info("Enter ID: ");
-                    id = scanner.nextLong();
-                    operations.read(id).ifPresentOrElse(
-                            data -> LOGGER.info("Data (ID: " + data.getId() + ", Value: " + data.getValue() + ")"),
-                            () -> LOGGER.warn("No data found with given ID.")
-                    );
+                    readHardwarePartById();
                     break;
                 case 3:
-                    operations.readAll().forEach(data -> LOGGER.info("Data (ID: "
-                            + data.getId() + ", Value: " + data.getValue() + ")"));
+                    readAllHardwareParts();
                     break;
                 case 4:
-                    LOGGER.info("Enter ID: ");
-                    id = scanner.nextLong();
-                    scanner.nextLine();
-                    LOGGER.info("Enter new value: ");
-                    value = scanner.nextLine();
-                    DataEntity updatedEntity = new DataEntity(id, value);
-                    operations.update(updatedEntity);
-                    LOGGER.info("Data updated.");
+                    updateHardwarePart();
                     break;
                 case 5:
-                    LOGGER.info("Enter ID to delete: ");
-                    id = scanner.nextLong();
-                    if (operations.delete(id)) {
-                        LOGGER.info("Data deleted.");
-                    } else {
-                        LOGGER.error("Deletion failed. No data found with given ID.");
-                    }
+                    deleteHardwarePartById();
                     break;
                 case 6:
                     running = false;
@@ -77,5 +45,74 @@ public class Main {
             }
         }
         scanner.close();
+    }
+
+    private static void displayMenu() {
+        LOGGER.info("Select an option:");
+        LOGGER.info("1. Create Hardware Part");
+        LOGGER.info("2. Read Hardware Part by ID");
+        LOGGER.info("3. Read All Hardware Parts");
+        LOGGER.info("4. Update Hardware Part");
+        LOGGER.info("5. Delete Hardware Part by ID");
+        LOGGER.info("6. Exit");
+    }
+
+    private static void createHardwarePart() {
+        HardwarePart part = new HardwarePart();
+        LOGGER.info("Enter name: ");
+        part.setName(scanner.nextLine());
+        LOGGER.info("Enter manufacturer: ");
+        part.setManufacturer(scanner.nextLine());
+        LOGGER.info("Enter category: ");
+        part.setCategory(scanner.nextLine());
+        LOGGER.info("Enter price: ");
+        part.setPrice(scanner.nextDouble());
+        scanner.nextLine();  // Consume newline left-over
+        LOGGER.info("Enter description: ");
+        part.setDescription(scanner.nextLine());
+        operations.create(part);
+        LOGGER.info("Hardware Part created with ID: {}", part.getId());
+    }
+
+    private static void readHardwarePartById() {
+        LOGGER.info("Enter ID: ");
+        long id = scanner.nextLong();
+        operations.read(id).ifPresentOrElse(data -> LOGGER.info(data.toString()),
+                () -> LOGGER.warn("No hardware part found with given ID."));
+    }
+
+    private static void readAllHardwareParts() {
+        operations.readAll().forEach(data -> LOGGER.info(data.toString()));
+    }
+
+    private static void updateHardwarePart() {
+        LOGGER.info("Enter ID for update: ");
+        long id = scanner.nextLong();
+        scanner.nextLine();
+        HardwarePart updatedPart = new HardwarePart();
+        updatedPart.setId(id);
+        LOGGER.info("Enter new name: ");
+        updatedPart.setName(scanner.nextLine());
+        LOGGER.info("Enter new manufacturer: ");
+        updatedPart.setManufacturer(scanner.nextLine());
+        LOGGER.info("Enter new category: ");
+        updatedPart.setCategory(scanner.nextLine());
+        LOGGER.info("Enter new price: ");
+        updatedPart.setPrice(scanner.nextDouble());
+        scanner.nextLine();  // Consume newline left-over
+        LOGGER.info("Enter new description: ");
+        updatedPart.setDescription(scanner.nextLine());
+        operations.update(updatedPart);
+        LOGGER.info("Hardware Part updated.");
+    }
+
+    private static void deleteHardwarePartById() {
+        LOGGER.info("Enter ID to delete: ");
+        long id = scanner.nextLong();
+        if (operations.delete(id)) {
+            LOGGER.info("Hardware Part deleted.");
+        } else {
+            LOGGER.error("Deletion failed. No hardware part found with given ID.");
+        }
     }
 }
