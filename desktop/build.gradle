@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'application'
+
+group = 'edu.bbte.idde.bfim2114'
+version = '1.0-SNAPSHOT'
+
+dependencies {
+    implementation project(':backend')
+}
+
+application {
+    setMainClass('edu.bbte.idde.bfim2114.desktop.Main')
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+}

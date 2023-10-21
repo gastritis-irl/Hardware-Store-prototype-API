@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'edu.bbte.idde.bfim2114'
+version = '1.0-SNAPSHOT'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+}
