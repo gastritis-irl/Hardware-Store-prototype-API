@@ -1,4 +1,3 @@
-
 package edu.bbte.idde.bfim2114.backend;
 
 import java.util.Objects;
@@ -29,10 +28,14 @@ public class DataEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DataEntity that = (DataEntity) o;
+    public boolean equals(Object item) {
+        if (this == item) {
+            return true;
+        }
+        if (item == null || getClass() != item.getClass()) {
+            return false;
+        }
+        DataEntity that = (DataEntity) item;
         return Objects.equals(id, that.id) && Objects.equals(value, that.value);
     }
 
