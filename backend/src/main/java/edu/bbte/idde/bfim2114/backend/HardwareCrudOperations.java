@@ -1,6 +1,7 @@
 
 package edu.bbte.idde.bfim2114.backend;
 
+import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +19,12 @@ public class HardwareCrudOperations implements CrudOperations<HardwarePart> {
     private final AtomicLong currentId = new AtomicLong(1);
 
     @Override
-    public void create(HardwarePart part) {
+    public HardwarePart create(HardwarePart part) {
         long id = currentId.getAndIncrement();
         part.setId(id);
         dataStore.put(id, part);
         LOGGER.info("HardwarePart with ID {} created.", id);
+        return part;
     }
 
     @Override
@@ -43,12 +45,14 @@ public class HardwareCrudOperations implements CrudOperations<HardwarePart> {
     }
 
     @Override
-    public void update(HardwarePart part) {
+    public HardwarePart update(HardwarePart part) {
         if (dataStore.containsKey(part.getId())) {
             dataStore.put(part.getId(), part);
             LOGGER.info("HardwarePart with ID {} updated.", part.getId());
+            return part;
         } else {
-            LOGGER.warn("Failed to update. HardwarePart with ID {} not found.", part.getId());
+            LOGGER.error("Failed to update. HardwarePart with ID {} not found.", part.getId());
+            throw new IllegalArgumentException("HardwarePart with the given ID does not exist");
         }
     }
 

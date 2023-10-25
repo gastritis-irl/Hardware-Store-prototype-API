@@ -1,5 +1,6 @@
 package edu.bbte.idde.bfim2114.backend;
 
+import edu.bbte.idde.bfim2114.backend.model.DataEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +17,10 @@ public class DataCrudOperations implements CrudOperations<DataEntity> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataCrudOperations.class);
 
     @Override
-    public void create(DataEntity entity) {
+    public DataEntity create(DataEntity entity) {
         entity.setId(idCounter++);
         dataStore.put(entity.getId(), entity);
+        return entity;
     }
 
     @Override
@@ -32,12 +34,13 @@ public class DataCrudOperations implements CrudOperations<DataEntity> {
     }
 
     @Override
-    public void update(DataEntity entity) {
+    public DataEntity update(DataEntity entity) {
         if (entity.getId() == null || !dataStore.containsKey(entity.getId())) {
             LOGGER.error("Entity with the given ID does not exist");
             throw new IllegalArgumentException("Entity with the given ID does not exist");
         }
         dataStore.put(entity.getId(), entity);
+        return entity;
     }
 
     @Override

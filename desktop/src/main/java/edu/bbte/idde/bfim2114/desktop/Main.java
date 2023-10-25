@@ -1,7 +1,7 @@
 package edu.bbte.idde.bfim2114.desktop;
 
 import edu.bbte.idde.bfim2114.backend.HardwareCrudOperations;
-import edu.bbte.idde.bfim2114.backend.HardwarePart;
+import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
