@@ -1,1 +1,3 @@
-rootProject.name = 'abcd1234-idde'
+
+rootProject.name = 'bfim2114'
+include 'backend', 'desktop'
