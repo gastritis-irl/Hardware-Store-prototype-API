@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<ruleset name="JavaRules"
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="JavaRules"
          xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
     <description>
@@ -41,7 +41,8 @@
         <properties>
             <property name="xpath">
                 <value>
-                    //VariableDeclaratorId[(string-length(@Image) &lt; 3) and (not (@Image='id')) and (not (@Image='i')) and (not (@Image='it')) and (not (@Image='e')) and (not (@Image='ex')) and (not (@Image='sb'))]
+                    //VariableDeclaratorId[(string-length(@Image) &lt; 3) and (not (@Image='id')) and (not (@Image='i'))
+                    and (not (@Image='it')) and (not (@Image='e')) and (not (@Image='ex')) and (not (@Image='sb'))]
                     [not(ancestor::ForInit)]
                     [not((ancestor::FormalParameter) and (ancestor::TryStatement))]
                 </value>
@@ -123,7 +124,6 @@
 
     <!-- security -->
     <rule ref="category/java/security.xml"/>
-
 
 
 </ruleset>

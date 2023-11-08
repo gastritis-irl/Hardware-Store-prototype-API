@@ -1,4 +1,3 @@
-
 package edu.bbte.idde.bfim2114.backend;
 
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
