@@ -49,10 +49,10 @@ public class HardwarePart extends BaseEntity {
     }
 
     public boolean isValid() {
-        return name != null && !name.trim().isEmpty() &&
-                manufacturer != null && !manufacturer.trim().isEmpty() &&
-                category != null && !category.trim().isEmpty() &&
-                price != null && price > 0;
+        return name != null && !name.isBlank()
+                && manufacturer != null && !manufacturer.isBlank()
+                && category != null && !category.isBlank()
+                && price != null && price > 0;
     }
 
     @Override

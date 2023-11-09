@@ -8,6 +8,33 @@
 </head>
 <body>
 <h1>Hardware Parts</h1>
+
+<form action="${pageContext.request.contextPath}/api/hardwareparts" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="manufacturer">Manufacturer:</label>
+        <input type="text" id="manufacturer" name="manufacturer" required>
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" id="price" name="price" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Add Hardware Part">
+    </div>
+</form>
+
 <%
     List<HardwarePart> parts = (List<HardwarePart>) request.getAttribute("parts");
     if (parts != null && !parts.isEmpty()) {
@@ -46,7 +73,7 @@
 <% } else { %>
 <p>No hardware parts available.</p>
 <% } %>
-<form action="${pageContext.request.contextPath}/logout" method="post">
+<form action="${pageContext.request.contextPath}/logout" method="get">
     <input type="submit" value="Logout">
 </form>
 </body>

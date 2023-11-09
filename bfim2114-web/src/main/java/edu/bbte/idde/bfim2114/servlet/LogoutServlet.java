@@ -1,4 +1,4 @@
-package edu.bbte.idde.bfim2114.webapp;
+package edu.bbte.idde.bfim2114.servlet;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
