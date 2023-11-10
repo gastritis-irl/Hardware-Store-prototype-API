@@ -5,11 +5,36 @@
 <head>
     <title>Hardware Parts List</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <script>
+        function submitFormAsJson(event) {
+            event.preventDefault();
+
+            const formData = {
+                "name": document.getElementById("name").value,
+                "manufacturer": document.getElementById("manufacturer").value,
+                "category": document.getElementById("category").value,
+                "price": document.getElementById("price").value,
+                "description": document.getElementById("description").value
+            };
+
+            const jsonData = JSON.stringify(formData);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "${pageContext.request.contextPath}/api/hardwareparts", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send(jsonData);
+        }
+    </script>
 </head>
 <body>
 <h1>Hardware Parts</h1>
 
-<form action="${pageContext.request.contextPath}/api/hardwareparts" method="post">
+<form onsubmit="submitFormAsJson(event)">
     <div>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>

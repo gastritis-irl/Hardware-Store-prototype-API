@@ -22,8 +22,7 @@ import java.util.Optional;
 public class HardwarePartServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HardwarePartServlet.class);
-
-    private final HardwareCrudOperations hardwareCrudOperations = new HardwareCrudOperations();
+    private final HardwareCrudOperations hardwareCrudOperations = HardwareCrudOperations.getInstance();
     private final Gson gson = new Gson();
 
     @Override

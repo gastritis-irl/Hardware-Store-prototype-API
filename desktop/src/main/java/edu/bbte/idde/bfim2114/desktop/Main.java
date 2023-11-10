@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class Main {
-    private static final HardwareCrudOperations OPERATIONS = new HardwareCrudOperations();
+    private static final HardwareCrudOperations OPERATIONS = HardwareCrudOperations.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final Scanner SCANNER = new Scanner(System.in);
 

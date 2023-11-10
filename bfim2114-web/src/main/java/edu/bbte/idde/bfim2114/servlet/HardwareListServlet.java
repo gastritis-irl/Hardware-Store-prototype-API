@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet("/hardware-list")
 public class HardwareListServlet extends HttpServlet {
 
-    private final HardwareCrudOperations hardwareCrudOperations = new HardwareCrudOperations();
+    private final HardwareCrudOperations hardwareCrudOperations = HardwareCrudOperations.getInstance();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HardwarePartServlet.class);
 
@@ -30,6 +30,3 @@ public class HardwareListServlet extends HttpServlet {
         request.getRequestDispatcher("/hardware-list.jsp").forward(request, response);
     }
 }
-
-
-
