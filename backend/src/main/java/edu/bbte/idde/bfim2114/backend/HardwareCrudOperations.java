@@ -1,4 +1,3 @@
-
 package edu.bbte.idde.bfim2114.backend;
 
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
@@ -12,11 +11,22 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class HardwareCrudOperations implements CrudOperations<HardwarePart> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HardwareCrudOperations.class);
+public final class HardwareCrudOperations implements CrudOperations<HardwarePart> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HardwareCrudOperations.class);
     private final Map<Long, HardwarePart> dataStore = new ConcurrentHashMap<>();
     private final AtomicLong currentId = new AtomicLong(1);
+
+    private HardwareCrudOperations() {
+    }
+
+    private static class Holder {
+        private static final HardwareCrudOperations INSTANCE = new HardwareCrudOperations();
+    }
+
+    public static HardwareCrudOperations getInstance() {
+        return Holder.INSTANCE;
+    }
 
     @Override
     public HardwarePart create(HardwarePart part) {

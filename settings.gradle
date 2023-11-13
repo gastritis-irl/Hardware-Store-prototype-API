@@ -1,3 +1,5 @@
-
 rootProject.name = 'bfim2114'
-include 'backend', 'desktop'
+include 'backend', 'desktop', 'bfim2114-web'
+include 'bfim2114-web:src:main:webapp'
+findProject(':bfim2114-web:src:main:webapp')?.name = 'webapp'
+

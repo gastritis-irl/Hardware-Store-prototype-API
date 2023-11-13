@@ -11,10 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DataCrudOperations implements CrudOperations<DataEntity> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataCrudOperations.class);
     private final ConcurrentHashMap<Long, DataEntity> dataStore = new ConcurrentHashMap<>();
     private Long idCounter = 1L;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataCrudOperations.class);
 
     @Override
     public DataEntity create(DataEntity entity) {
