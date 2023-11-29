@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Slf4j
-public class JDBCInit {
+public class JdbcInit {
 
     private final DataSource connectionManager = DataSourceConfig.getDataSource();
 
-    public JDBCInit() {
+    public JdbcInit() {
         try {
             connectionManager.getConnection();
         } catch (SQLException e) {
@@ -28,32 +28,32 @@ public class JDBCInit {
     }
 
     private void createUsersTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS users (" +
-                "id BIGINT PRIMARY KEY," +
-                "username VARCHAR(255)," +
-                "password VARCHAR(255)" +
-                ")";
+        String sql = "CREATE TABLE IF NOT EXISTS users ("
+                + "id BIGINT PRIMARY KEY,"
+                + "username VARCHAR(255),"
+                + "password VARCHAR(255)"
+                + ")";
         executeUpdate(sql);
     }
 
     private void createHardwarePartsTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS hardware_parts (" +
-                "id BIGINT PRIMARY KEY," +
-                "name VARCHAR(255)," +
-                "manufacturer VARCHAR(255)," +
-                "category VARCHAR(255)," +
-                "price DOUBLE," +
-                "description VARCHAR(255)," +
-                "userId BIGINT," +
-                "FOREIGN KEY (userId) REFERENCES users(id)" +
-                ")";
+        String sql = "CREATE TABLE IF NOT EXISTS hardware_parts ("
+                + "id BIGINT PRIMARY KEY,"
+                + "name VARCHAR(255),"
+                + "manufacturer VARCHAR(255),"
+                + "category VARCHAR(255),"
+                + "price DOUBLE,"
+                + "description VARCHAR(255),"
+                + "userId BIGINT,"
+                + "FOREIGN KEY (userId) REFERENCES users(id)"
+                + ")";
         executeUpdate(sql);
     }
 
     private void executeUpdate(String sql) {
         try (Connection conn = connectionManager.getConnection();
-             Statement s = conn.createStatement()) {
-            s.executeUpdate(sql);
+             Statement statement = conn.createStatement()) {
+            statement.executeUpdate(sql);
         } catch (SQLException e) {
             log.error("Table creation failed!", e);
             throw new RepositoryException("Table creation failed!", e);

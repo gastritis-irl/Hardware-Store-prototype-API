@@ -4,10 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
-import edu.bbte.idde.bfim2114.backend.repository.jdbc.JDBCInit;
+import edu.bbte.idde.bfim2114.backend.repository.jdbc.JdbcInit;
 import edu.bbte.idde.bfim2114.backend.service.HardwareService;
 import edu.bbte.idde.bfim2114.backend.service.ServiceFactory;
 import edu.bbte.idde.bfim2114.backend.service.UserService;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,10 +34,17 @@ public class HardwarePartServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        String profile = System.getProperty("profile");
-        String init = System.getProperty("initdb");
-        if ("prod".equals(profile) && "true".equals(init)) {
-            JDBCInit jdbcInit = new JDBCInit();
+        Dotenv dotenv = Dotenv.load();
+
+        String profile = dotenv.get("PROFILE");
+        String initDb = dotenv.get("INITDB");
+
+        log.info("Initializing application in {} mode", profile);
+        log.info("Initializing database: {}", initDb);
+
+        if ("prod".equals(profile) && "true".equals(initDb)) {
+            log.info("Initializing database...");
+            JdbcInit jdbcInit = new JdbcInit();
             jdbcInit.init();
         }
     }

@@ -55,6 +55,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(String username) {
-        return username.equals("admin");
+        return "admin".equals(username);
     }
 }

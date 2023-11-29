@@ -15,29 +15,11 @@ public class PropertyProvider {
     static {
         properties = new Properties();
 
-        String propertiesResourceName = buildPropertiesResourceName();
-        LOG.info("Attempting to load properties from {}", propertiesResourceName);
-
-        try (InputStream inputStream = PropertyProvider.class.getResourceAsStream(propertiesResourceName)) {
+        try (InputStream inputStream = PropertyProvider.class.getResourceAsStream("application.properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
             LOG.error("Error loading properties", e);
         }
-    }
-
-    private static String buildPropertiesResourceName() {
-        LOG.info("Loading properties");
-        StringBuilder sb = new StringBuilder();
-        sb.append('/').append(PROP_FILE_NAME);
-
-        String profile = System.getProperty("profile");
-        LOG.info("Determined profile: {}", profile);
-        if (profile != null && !profile.isEmpty()) {
-            sb.append('-').append(profile);
-        }
-
-        sb.append(".properties");
-        return sb.toString();
     }
 
     public static String getProperty(final String key) {

@@ -2,7 +2,6 @@ package edu.bbte.idde.bfim2114.backend.repository.mem;
 
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.backend.repository.HardwareRepository;
-import edu.bbte.idde.bfim2114.backend.repository.RepositoryException;
 import edu.bbte.idde.bfim2114.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,7 +48,7 @@ public final class MemHardwareRepository implements HardwareRepository {
     }
 
     @Override
-    public HardwarePart findByPartName(String partName) throws RepositoryException {
+    public HardwarePart findByPartName(String partName) {
         return dataStore.values().stream()
                 .filter(part -> part.getName().equals(partName))
                 .findFirst()

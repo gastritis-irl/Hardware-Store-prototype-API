@@ -5,13 +5,13 @@ import edu.bbte.idde.bfim2114.backend.model.BaseEntity;
 import java.util.Collection;
 
 public interface BaseRepository<T extends BaseEntity> {
-    T create(T entity) throws RepositoryException;
+    T create(T entity);
 
-    T findById(Long id) throws RepositoryException;
+    T findById(Long id);
 
-    Collection<T> findAll() throws RepositoryException;
+    Collection<T> findAll();
 
-    void deleteById(Long id) throws RepositoryException;
+    void deleteById(Long id);
 }
 
 

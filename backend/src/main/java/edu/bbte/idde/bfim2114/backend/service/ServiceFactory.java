@@ -3,7 +3,7 @@ package edu.bbte.idde.bfim2114.backend.service;
 import lombok.Getter;
 
 @Getter
-public class ServiceFactory {
+public final class ServiceFactory {
 
     private static ServiceFactory instance;
     private final UserService userService;

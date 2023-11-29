@@ -27,8 +27,11 @@ public class HardwareServiceImpl implements HardwareService {
     public boolean isValid(HardwarePart part) {
         Long userId = part.getId();
 
-        return userService.existsById(userId) && part.getName() != null && !part.getName().isEmpty() && part.getCategory() != null
-                && !part.getCategory().isEmpty() && part.getManufacturer() != null && !part.getManufacturer().isEmpty() && part.getPrice() != null && part.getDescription() != null && !part.getDescription().isEmpty();
+        return userService.existsById(userId) && part.getName() != null
+                && !part.getName().isEmpty() && part.getCategory() != null
+                && !part.getCategory().isEmpty() && part.getManufacturer() != null
+                && !part.getManufacturer().isEmpty()
+                && part.getPrice() != null && part.getDescription() != null && !part.getDescription().isEmpty();
     }
 
     @Override

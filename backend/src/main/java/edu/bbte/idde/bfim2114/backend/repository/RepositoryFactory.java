@@ -1,6 +1,6 @@
 package edu.bbte.idde.bfim2114.backend.repository;
 
-import edu.bbte.idde.bfim2114.backend.repository.jdbc.JDBCRepositoryFactory;
+import edu.bbte.idde.bfim2114.backend.repository.jdbc.JdbcRepositoryFactory;
 import edu.bbte.idde.bfim2114.backend.repository.mem.MemRepositoryFactory;
 
 public abstract class RepositoryFactory {
@@ -11,7 +11,7 @@ public abstract class RepositoryFactory {
         if (instance == null) {
             String profile = System.getProperty("profile");
             if ("mysql".equals(profile)) {
-                instance = new JDBCRepositoryFactory();
+                instance = new JdbcRepositoryFactory();
             } else {
                 instance = new MemRepositoryFactory();
             }

@@ -4,14 +4,17 @@ import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 
 public interface HardwareRepository extends BaseRepository<HardwarePart> {
 
-    HardwarePart findByPartName(String partName) throws RepositoryException;
+    HardwarePart findByPartName(String partName);
 
-    HardwarePart findById(Long id) throws RepositoryException;
+    @Override
+    HardwarePart findById(Long id);
 
-    void deleteById(Long id) throws RepositoryException;
+    @Override
+    void deleteById(Long id);
 
-    HardwarePart create(HardwarePart entity) throws RepositoryException;
+    @Override
+    HardwarePart create(HardwarePart entity);
 
-    HardwarePart update(HardwarePart entity) throws RepositoryException;
+    HardwarePart update(HardwarePart entity);
 
 }

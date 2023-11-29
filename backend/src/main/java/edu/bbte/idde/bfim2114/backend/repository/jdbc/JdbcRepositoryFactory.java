@@ -4,16 +4,16 @@ import edu.bbte.idde.bfim2114.backend.repository.HardwareRepository;
 import edu.bbte.idde.bfim2114.backend.repository.RepositoryFactory;
 import edu.bbte.idde.bfim2114.backend.repository.UserRepository;
 
-public class JDBCRepositoryFactory extends RepositoryFactory {
+public class JdbcRepositoryFactory extends RepositoryFactory {
 
     @Override
     public UserRepository getUserRepository() {
-        return new JDBCUserRepository();
+        return new JdbcUserRepository();
     }
 
     @Override
     public HardwareRepository getHardwareRepository() {
-        return new JDBCHardwareRepository();
+        return new JdbcHardwareRepository();
     }
 }
 

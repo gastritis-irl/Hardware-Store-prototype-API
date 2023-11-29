@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Slf4j
-public class JDBCUserRepository implements UserRepository {
+public class JdbcUserRepository implements UserRepository {
 
     private final DataSource connectionManager = DataSourceConfig.getDataSource();
 
-    public JDBCUserRepository() {
+    public JdbcUserRepository() {
         try {
             connectionManager.getConnection();
         } catch (SQLException e) {
@@ -31,11 +31,11 @@ public class JDBCUserRepository implements UserRepository {
     public User create(User entity) {
         String sql = "INSERT INTO users VALUES(?, ?, ?)";
         try (Connection conn = connectionManager.getConnection()) {
-            try (PreparedStatement s = conn.prepareStatement(sql)) {
-                s.setLong(1, entity.getId());
-                s.setString(2, entity.getUsername());
-                s.setString(3, entity.getPassword());
-                s.executeUpdate();
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setLong(1, entity.getId());
+                preparedStatement.setString(2, entity.getUsername());
+                preparedStatement.setString(3, entity.getPassword());
+                preparedStatement.executeUpdate();
                 return entity;
             } catch (SQLException e) {
                 log.error("User creation failed!", e);
@@ -48,14 +48,14 @@ public class JDBCUserRepository implements UserRepository {
     }
 
     @Override
-    public User update(User entity) throws RepositoryException {
+    public User update(User entity) {
         String sql = "UPDATE users SET username=?, password=? WHERE id=?";
         try (Connection conn = connectionManager.getConnection()) {
-            try (PreparedStatement s = conn.prepareStatement(sql)) {
-                s.setString(1, entity.getUsername());
-                s.setString(2, entity.getPassword());
-                s.setLong(3, entity.getId());
-                s.executeUpdate();
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, entity.getUsername());
+                preparedStatement.setString(2, entity.getPassword());
+                preparedStatement.setLong(3, entity.getId());
+                preparedStatement.executeUpdate();
                 return entity;
             } catch (SQLException e) {
                 log.error("User update failed!", e);
@@ -71,14 +71,13 @@ public class JDBCUserRepository implements UserRepository {
     public User findById(Long id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         try (Connection conn = connectionManager.getConnection();
-             PreparedStatement s = conn.prepareStatement(sql)) {
-            s.setLong(1, id);
-            ResultSet rs = s.executeQuery();
-            boolean exists = rs.next();
-            if (!exists) {
-                return null;
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return fromRow(resultSet);
             }
-            return fromRow(rs);
+            return fromRow(resultSet);
         } catch (SQLException e) {
             log.error("User search failed!", e);
             throw new RepositoryException("User search failed!", e);
@@ -90,10 +89,10 @@ public class JDBCUserRepository implements UserRepository {
         String sql = "SELECT * FROM users";
         Collection<User> users = new ArrayList<>();
         try (Connection conn = connectionManager.getConnection();
-             PreparedStatement s = conn.prepareStatement(sql)) {
-            ResultSet rs = s.executeQuery();
-            while (rs.next()) {
-                users.add(fromRow(rs));
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                users.add(fromRow(resultSet));
             }
         } catch (SQLException e) {
             log.error("User search failed!", e);
@@ -106,9 +105,9 @@ public class JDBCUserRepository implements UserRepository {
     public void deleteById(Long id) {
         String sql = "DELETE FROM users WHERE id=?";
         try (Connection conn = connectionManager.getConnection();
-             PreparedStatement s = conn.prepareStatement(sql)) {
-            s.setLong(1, id);
-            s.executeUpdate();
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             log.error("User deletion failed!", e);
             throw new RepositoryException("User deletion failed!", e);
@@ -119,26 +118,25 @@ public class JDBCUserRepository implements UserRepository {
     public User findByUserName(String userName) {
         String sql = "SELECT * FROM users WHERE username = ?";
         try (Connection conn = connectionManager.getConnection();
-             PreparedStatement s = conn.prepareStatement(sql)) {
-            s.setString(1, userName);
-            ResultSet rs = s.executeQuery();
-            boolean exists = rs.next();
-            if (!exists) {
-                return null;
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, userName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return fromRow(resultSet);
             }
-            return fromRow(rs);
+            return fromRow(resultSet);
         } catch (SQLException e) {
             log.error("User search failed!", e);
             throw new RepositoryException("User search failed!", e);
         }
     }
 
-    private User fromRow(ResultSet rs) throws SQLException {
+    private User fromRow(ResultSet resultSet) throws SQLException {
         User user = new User(
-                rs.getString(2),
-                rs.getString(3)
+                resultSet.getString(2),
+                resultSet.getString(3)
         );
-        user.setId(rs.getLong(1));
+        user.setId(resultSet.getLong(1));
         return user;
     }
 }
