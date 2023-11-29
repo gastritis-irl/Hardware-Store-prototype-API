@@ -7,6 +7,7 @@ version = '1.0-SNAPSHOT'
 
 dependencies {
     implementation project(':backend')
+    implementation 'org.projectlombok:lombok:1.18.28'
     compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
 }

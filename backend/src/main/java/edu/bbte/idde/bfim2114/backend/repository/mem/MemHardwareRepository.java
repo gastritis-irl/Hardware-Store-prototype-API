@@ -24,10 +24,6 @@ public final class MemHardwareRepository implements HardwareRepository {
     private MemHardwareRepository() {
     }
 
-    private static class Holder {
-        private static final MemHardwareRepository INSTANCE = new MemHardwareRepository();
-    }
-
     public static MemHardwareRepository getInstance() {
         return Holder.INSTANCE;
     }
@@ -100,5 +96,9 @@ public final class MemHardwareRepository implements HardwareRepository {
     public void deleteById(Long id) {
         log.info("Deleting HardwarePart with ID {}.", id);
         dataStore.remove(id);
+    }
+
+    private static class Holder {
+        private static final MemHardwareRepository INSTANCE = new MemHardwareRepository();
     }
 }

@@ -1,15 +1,12 @@
 package edu.bbte.idde.bfim2114.backend.service;
 
 import edu.bbte.idde.bfim2114.backend.model.User;
+import edu.bbte.idde.bfim2114.backend.repository.RepositoryFactory;
 import edu.bbte.idde.bfim2114.backend.repository.UserRepository;
 
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository = RepositoryFactory.getInstance().getUserRepository();
 
     @Override
     public boolean authenticate(String username, String password) {
@@ -18,6 +15,11 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return user.getPassword().equals(password);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return userRepository.findById(id) != null;
     }
 
     @Override

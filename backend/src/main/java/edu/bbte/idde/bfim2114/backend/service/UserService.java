@@ -10,4 +10,6 @@ public interface UserService {
     boolean deleteUser(String username, String password);
 
     boolean isAdmin(String username);
+
+    boolean existsById(Long id);
 }

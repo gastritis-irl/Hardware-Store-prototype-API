@@ -23,7 +23,7 @@ public class JDBCHardwareRepository implements HardwareRepository {
             connectionManager.getConnection();
         } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 
@@ -96,8 +96,8 @@ public class JDBCHardwareRepository implements HardwareRepository {
     @Override
     public HardwarePart create(HardwarePart entity) throws RepositoryException {
         String sql = "INSERT INTO hardware_parts VALUES(?, ?, ?, ?, ?, ?, ?)";
-        try(Connection conn = connectionManager.getConnection()) {
-            try(PreparedStatement s = conn.prepareStatement(sql)){
+        try (Connection conn = connectionManager.getConnection()) {
+            try (PreparedStatement s = conn.prepareStatement(sql)) {
                 s.setLong(1, entity.getId());
                 s.setString(2, entity.getName());
                 s.setString(3, entity.getManufacturer());
@@ -109,19 +109,19 @@ public class JDBCHardwareRepository implements HardwareRepository {
                 return entity;
             } catch (SQLException e) {
                 log.error("HardwarePart creation failed!", e);
-                throw new RepositoryException("HardwarePart creation failed!",e);
+                throw new RepositoryException("HardwarePart creation failed!", e);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 
     @Override
     public HardwarePart update(HardwarePart entity) throws RepositoryException {
         String sql = "UPDATE hardware_parts SET name=?, manufacturer=?, category=?, price=?, description=?, userId=? WHERE id=?";
-        try(Connection conn = connectionManager.getConnection()) {
-            try(PreparedStatement s = conn.prepareStatement(sql)){
+        try (Connection conn = connectionManager.getConnection()) {
+            try (PreparedStatement s = conn.prepareStatement(sql)) {
                 s.setString(1, entity.getName());
                 s.setString(2, entity.getManufacturer());
                 s.setString(3, entity.getCategory());
@@ -133,11 +133,11 @@ public class JDBCHardwareRepository implements HardwareRepository {
                 return entity;
             } catch (SQLException e) {
                 log.error("HardwarePart update failed!", e);
-                throw new RepositoryException("HardwarePart update failed!",e);
+                throw new RepositoryException("HardwarePart update failed!", e);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 

@@ -4,7 +4,9 @@ import edu.bbte.idde.bfim2114.backend.model.User;
 import edu.bbte.idde.bfim2114.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,10 +17,6 @@ public final class MemUserRepository implements UserRepository {
     private final AtomicLong currentId = new AtomicLong(1);
 
     private MemUserRepository() {
-    }
-
-    private static class Holder {
-        private static final MemUserRepository INSTANCE = new MemUserRepository();
     }
 
     public static MemUserRepository getInstance() {
@@ -75,5 +73,9 @@ public final class MemUserRepository implements UserRepository {
     public void deleteById(Long id) {
         log.info("Deleting User with ID {}.", id);
         dataStore.remove(id);
+    }
+
+    private static class Holder {
+        private static final MemUserRepository INSTANCE = new MemUserRepository();
     }
 }

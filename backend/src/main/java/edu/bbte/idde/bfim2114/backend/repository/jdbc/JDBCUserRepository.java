@@ -3,7 +3,6 @@ package edu.bbte.idde.bfim2114.backend.repository.jdbc;
 import edu.bbte.idde.bfim2114.backend.model.User;
 import edu.bbte.idde.bfim2114.backend.repository.RepositoryException;
 import edu.bbte.idde.bfim2114.backend.repository.UserRepository;
-import edu.bbte.idde.bfim2114.backend.repository.jdbc.DataSourceConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -24,15 +23,15 @@ public class JDBCUserRepository implements UserRepository {
             connectionManager.getConnection();
         } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 
     @Override
     public User create(User entity) {
         String sql = "INSERT INTO users VALUES(?, ?, ?)";
-        try(Connection conn = connectionManager.getConnection()) {
-            try(PreparedStatement s = conn.prepareStatement(sql)){
+        try (Connection conn = connectionManager.getConnection()) {
+            try (PreparedStatement s = conn.prepareStatement(sql)) {
                 s.setLong(1, entity.getId());
                 s.setString(2, entity.getUsername());
                 s.setString(3, entity.getPassword());
@@ -40,19 +39,19 @@ public class JDBCUserRepository implements UserRepository {
                 return entity;
             } catch (SQLException e) {
                 log.error("User creation failed!", e);
-                throw new RepositoryException("User creation failed!",e);
+                throw new RepositoryException("User creation failed!", e);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 
     @Override
     public User update(User entity) throws RepositoryException {
         String sql = "UPDATE users SET username=?, password=? WHERE id=?";
-        try(Connection conn = connectionManager.getConnection()) {
-            try(PreparedStatement s = conn.prepareStatement(sql)){
+        try (Connection conn = connectionManager.getConnection()) {
+            try (PreparedStatement s = conn.prepareStatement(sql)) {
                 s.setString(1, entity.getUsername());
                 s.setString(2, entity.getPassword());
                 s.setLong(3, entity.getId());
@@ -60,11 +59,11 @@ public class JDBCUserRepository implements UserRepository {
                 return entity;
             } catch (SQLException e) {
                 log.error("User update failed!", e);
-                throw new RepositoryException("User update failed!",e);
+                throw new RepositoryException("User update failed!", e);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 

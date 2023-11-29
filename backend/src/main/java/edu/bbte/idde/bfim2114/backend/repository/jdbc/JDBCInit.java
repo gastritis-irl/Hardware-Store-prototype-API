@@ -18,7 +18,7 @@ public class JDBCInit {
             connectionManager.getConnection();
         } catch (SQLException e) {
             log.error("Connection failed!", e);
-            throw new RepositoryException("Connection failed!",e);
+            throw new RepositoryException("Connection failed!", e);
         }
     }
 
