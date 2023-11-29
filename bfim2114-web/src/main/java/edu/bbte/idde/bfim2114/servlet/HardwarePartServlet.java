@@ -4,12 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
-import edu.bbte.idde.bfim2114.backend.repository.jdbc.JdbcInit;
 import edu.bbte.idde.bfim2114.backend.service.HardwareService;
 import edu.bbte.idde.bfim2114.backend.service.ServiceFactory;
 import edu.bbte.idde.bfim2114.backend.service.UserService;
-import io.github.cdimascio.dotenv.Dotenv;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,24 +27,6 @@ public class HardwarePartServlet extends HttpServlet {
     private final UserService userService = ServiceFactory.getInstance().getUserService();
 
     private final Gson gson = new Gson();
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        Dotenv dotenv = Dotenv.load();
-
-        String profile = dotenv.get("PROFILE");
-        String initDb = dotenv.get("INITDB");
-
-        log.info("Initializing application in {} mode", profile);
-        log.info("Initializing database: {}", initDb);
-
-        if ("prod".equals(profile) && "true".equals(initDb)) {
-            log.info("Initializing database...");
-            JdbcInit jdbcInit = new JdbcInit();
-            jdbcInit.init();
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

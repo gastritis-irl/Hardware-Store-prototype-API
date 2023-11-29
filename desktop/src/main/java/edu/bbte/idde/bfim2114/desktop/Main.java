@@ -1,14 +1,16 @@
 package edu.bbte.idde.bfim2114.desktop;
 
-import edu.bbte.idde.bfim2114.backend.repository.mem.MemHardwareRepository;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
+import edu.bbte.idde.bfim2114.backend.service.HardwareService;
+import edu.bbte.idde.bfim2114.backend.service.ServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
 public class Main {
-    private static final MemHardwareRepository OPERATIONS = MemHardwareRepository.getInstance();
+
+    private static final HardwareService OPERATIONS = ServiceFactory.getInstance().getHardwareService();
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -108,6 +110,6 @@ public class Main {
     private static void deleteHardwarePartById() {
         LOGGER.info("Enter ID to delete: ");
         long id = SCANNER.nextLong();
-        OPERATIONS.deleteById(id);
+        OPERATIONS.delete(id);
     }
 }
