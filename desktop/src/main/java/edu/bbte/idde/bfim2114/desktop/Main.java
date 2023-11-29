@@ -1,6 +1,6 @@
 package edu.bbte.idde.bfim2114.desktop;
 
-import edu.bbte.idde.bfim2114.backend.HardwareCrudOperations;
+import edu.bbte.idde.bfim2114.backend.repository.mem.MemHardwareRepository;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class Main {
-    private static final HardwareCrudOperations OPERATIONS = HardwareCrudOperations.getInstance();
+    private static final MemHardwareRepository OPERATIONS = MemHardwareRepository.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -77,12 +77,11 @@ public class Main {
     private static void readHardwarePartById() {
         LOGGER.info("Enter ID: ");
         long id = SCANNER.nextLong();
-        OPERATIONS.read(id).ifPresentOrElse(data -> LOGGER.info(data.toString()),
-                () -> LOGGER.warn("No hardware part found with given ID."));
+        OPERATIONS.findById(id);
     }
 
     private static void readAllHardwareParts() {
-        OPERATIONS.readAll().forEach(data -> LOGGER.info(data.toString()));
+        OPERATIONS.findAll().forEach(data -> LOGGER.info(data.toString()));
     }
 
     private static void updateHardwarePart() {
@@ -109,10 +108,6 @@ public class Main {
     private static void deleteHardwarePartById() {
         LOGGER.info("Enter ID to delete: ");
         long id = SCANNER.nextLong();
-        if (OPERATIONS.delete(id)) {
-            LOGGER.info("Hardware Part deleted.");
-        } else {
-            LOGGER.error("Deletion failed. No hardware part found with given ID.");
-        }
+        OPERATIONS.deleteById(id);
     }
 }

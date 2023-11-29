@@ -15,11 +15,4 @@ public class HardwarePart extends BaseEntity {
     private Double price;
     private String description;
     private Long userId;
-
-    public boolean isValid() {
-        return name != null && !name.isBlank()
-                && manufacturer != null && !manufacturer.isBlank()
-                && category != null && !category.isBlank()
-                && price != null && price > 0;
-    }
 }

@@ -49,6 +49,26 @@ public class JDBCUserRepository implements UserRepository {
     }
 
     @Override
+    public User update(User entity) throws RepositoryException {
+        String sql = "UPDATE users SET username=?, password=? WHERE id=?";
+        try(Connection conn = connectionManager.getConnection()) {
+            try(PreparedStatement s = conn.prepareStatement(sql)){
+                s.setString(1, entity.getUsername());
+                s.setString(2, entity.getPassword());
+                s.setLong(3, entity.getId());
+                s.executeUpdate();
+                return entity;
+            } catch (SQLException e) {
+                log.error("User update failed!", e);
+                throw new RepositoryException("User update failed!",e);
+            }
+        }catch(SQLException e){
+            log.error("Connection failed!", e);
+            throw new RepositoryException("Connection failed!",e);
+        }
+    }
+
+    @Override
     public User findById(Long id) {
         String sql = "SELECT * FROM users WHERE id = ?";
         try (Connection conn = connectionManager.getConnection();

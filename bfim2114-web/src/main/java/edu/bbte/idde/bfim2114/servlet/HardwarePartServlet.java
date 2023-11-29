@@ -3,7 +3,7 @@ package edu.bbte.idde.bfim2114.servlet;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import edu.bbte.idde.bfim2114.backend.HardwareCrudOperations;
+import edu.bbte.idde.bfim2114.backend.repository.mem.MemHardwareRepository;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,14 +15,13 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Optional;
 
 
 @WebServlet("/api/hardwareparts")
 public class HardwarePartServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HardwarePartServlet.class);
-    private final HardwareCrudOperations hardwareCrudOperations = HardwareCrudOperations.getInstance();
+    private final MemHardwareRepository memHardwareRepository = MemHardwareRepository.getInstance();
     private final Gson gson = new Gson();
 
     @Override
@@ -33,7 +32,7 @@ public class HardwarePartServlet extends HttpServlet {
         LOGGER.info("GET /api/hardwareparts");
 
         if (idParam == null) {
-            List<HardwarePart> parts = hardwareCrudOperations.readAll();
+            List<HardwarePart> parts = memHardwareRepository.findAll();
             String json = gson.toJson(parts);
             out.print(json);
             LOGGER.info("Returned list of HardwareParts");
@@ -41,13 +40,13 @@ public class HardwarePartServlet extends HttpServlet {
         } else {
             try {
                 Long id = Long.parseLong(idParam);
-                Optional<HardwarePart> part = hardwareCrudOperations.read(id);
-                if (part.isEmpty()) {
+                HardwarePart part = memHardwareRepository.findById(id);
+                if (part == null) {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     out.print("{}");
                     LOGGER.warn("HardwarePart with id: {} not found", id);
                 } else {
-                    String json = gson.toJson(part.get());
+                    String json = gson.toJson(part);
                     out.print(json);
                     LOGGER.info("Returned HardwarePart with id: {}", id);
                 }
@@ -68,7 +67,7 @@ public class HardwarePartServlet extends HttpServlet {
         try {
             HardwarePart part = gson.fromJson(request.getReader(), HardwarePart.class);
             if (part.isValid()) {
-                HardwarePart createdPart = hardwareCrudOperations.create(part);
+                HardwarePart createdPart = memHardwareRepository.create(part);
                 response.setStatus(HttpServletResponse.SC_CREATED);
                 String json = gson.toJson(createdPart);
                 out.print(json);
@@ -99,8 +98,8 @@ public class HardwarePartServlet extends HttpServlet {
         } else {
             try {
                 Long id = Long.parseLong(idParam);
-                Optional<HardwarePart> part = hardwareCrudOperations.read(id);
-                if (part.isEmpty()) {
+                HardwarePart part = memHardwareRepository.findById(id);
+                if (part == null) {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     out.print("{\"error\":\"HardwarePart not found\"}");
                     LOGGER.warn("HardwarePart with id: {} not found", id);
@@ -109,7 +108,7 @@ public class HardwarePartServlet extends HttpServlet {
                         HardwarePart updatedPart = gson.fromJson(request.getReader(), HardwarePart.class);
                         updatedPart.setId(id);
                         if (updatedPart.isValid()) {
-                            hardwareCrudOperations.update(updatedPart);
+                            memHardwareRepository.update(updatedPart);
                             response.setStatus(HttpServletResponse.SC_OK);
                             String json = gson.toJson(updatedPart);
                             out.print(json);
@@ -148,13 +147,7 @@ public class HardwarePartServlet extends HttpServlet {
         } else {
             try {
                 Long id = Long.parseLong(idParam);
-                if (hardwareCrudOperations.delete(id)) {
-                    LOGGER.info("Deleted HardwarePart with id: {}", id);
-                } else {
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                    out.print("{\"error\":\"HardwarePart not found\"}");
-                    LOGGER.warn("HardwarePart with id: {} not found", id);
-                }
+                memHardwareRepository.deleteById(id);
             } catch (NumberFormatException e) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 out.print("{\"error\":\"Invalid ID format\"}");

@@ -1,6 +1,6 @@
 package edu.bbte.idde.bfim2114.servlet;
 
-import edu.bbte.idde.bfim2114.backend.HardwareCrudOperations;
+import edu.bbte.idde.bfim2114.backend.repository.mem.MemHardwareRepository;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet("/hardware-list")
 public class HardwareListServlet extends HttpServlet {
 
-    private final HardwareCrudOperations hardwareCrudOperations = HardwareCrudOperations.getInstance();
+    private final MemHardwareRepository memHardwareRepository = MemHardwareRepository.getInstance();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HardwarePartServlet.class);
 
@@ -24,7 +24,7 @@ public class HardwareListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         LOGGER.info("GET /hardware-list");
-        List<HardwarePart> parts = hardwareCrudOperations.readAll();
+        List<HardwarePart> parts = memHardwareRepository.findAll();
         LOGGER.info(parts.toString());
         request.setAttribute("parts", parts);
         request.getRequestDispatcher("/hardware-list.jsp").forward(request, response);
