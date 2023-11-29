@@ -23,14 +23,15 @@ publishing {
     }
 }
 
+def catalinaHome = System.getenv('CATALINA_HOME')
+
 tasks.register('deploy', Copy) {
     dependsOn 'build', 'war'
     from war.archiveFile
-    into "C:/Users/bfcsa/apache-tomcat-10.1.15-windows-x64/apache-tomcat-10.1.15/webapps"
+    into "${catalinaHome}/webapps"
 }
 
-
 tasks.register('undeploy', Delete) {
-    delete "C:/Users/bfcsa/apache-tomcat-10.1.15-windows-x64/apache-tomcat-10.1.15/webapps/bfim2114-web-1.0-SNAPSHOT.war"
+    delete "${catalinaHome}/webapps/bfim2114-web-1.0-SNAPSHOT.war"
 }
 

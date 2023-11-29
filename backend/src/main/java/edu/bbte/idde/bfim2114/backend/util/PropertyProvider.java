@@ -17,7 +17,8 @@ public class PropertyProvider {
 
         LOG.info("Loading properties");
         LOG.info("Attempting to load properties from {}", PROP_FILE_NAME + ".properties");
-        try (InputStream inputStream = PropertyProvider.class.getResourceAsStream('/' + PROP_FILE_NAME + ".properties")) {
+        try (InputStream inputStream =
+                     PropertyProvider.class.getResourceAsStream('/' + PROP_FILE_NAME + ".properties")) {
             properties.load(inputStream);
         } catch (IOException e) {
             LOG.error("Error loading properties", e);
