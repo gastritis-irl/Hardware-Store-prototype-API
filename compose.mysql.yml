@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  jdbc-mysql:
+    image: mysql:8.1.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: jdbcdb
+      MYSQL_USER: jdbcuser
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3307:3306"
