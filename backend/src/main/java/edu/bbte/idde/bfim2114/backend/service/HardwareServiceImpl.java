@@ -13,6 +13,7 @@ public class HardwareServiceImpl implements HardwareService {
 
     private final HardwareRepository hardwareRepository = RepositoryFactory.getInstance().getHardwareRepository();
     private final UserService userService;
+
     public HardwareServiceImpl(UserService userService) {
         this.userService = userService;
     }
@@ -40,7 +41,7 @@ public class HardwareServiceImpl implements HardwareService {
     @Override
     public boolean isValid(HardwarePart part) {
         try {
-            if(part == null) {
+            if (part == null) {
                 return false;
             }
             Long userId = part.getUserId();

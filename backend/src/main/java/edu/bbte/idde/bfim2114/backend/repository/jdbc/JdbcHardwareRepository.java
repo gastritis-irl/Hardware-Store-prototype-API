@@ -90,10 +90,11 @@ public class JdbcHardwareRepository implements HardwareRepository {
 
     @Override
     public HardwarePart create(HardwarePart entity) {
-        String sql = "INSERT INTO hardware_parts(name, manufacturer, category, price, description, userId) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO hardware_parts"
+                + "(name, manufacturer, category, price, description, userId) VALUES(?, ?, ?, ?, ?, ?)";
         try (Connection conn = connectionManager.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            PrepareThePrepared(entity, preparedStatement);
+            prepareThePrepared(entity, preparedStatement);
             preparedStatement.executeUpdate();
 
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -107,7 +108,7 @@ public class JdbcHardwareRepository implements HardwareRepository {
         }
     }
 
-    private void PrepareThePrepared(HardwarePart entity, PreparedStatement preparedStatement) throws SQLException {
+    private void prepareThePrepared(HardwarePart entity, PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, entity.getName());
         preparedStatement.setString(2, entity.getManufacturer());
         preparedStatement.setString(3, entity.getCategory());
@@ -122,7 +123,7 @@ public class JdbcHardwareRepository implements HardwareRepository {
                 + "category=?, price=?, description=?, userId=? WHERE id=?";
         try (Connection conn = connectionManager.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            PrepareThePrepared(entity, preparedStatement);
+            prepareThePrepared(entity, preparedStatement);
             preparedStatement.setLong(7, entity.getId());
             preparedStatement.executeUpdate();
             return entity;
