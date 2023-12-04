@@ -11,7 +11,7 @@ public final class ServiceFactory {
 
     private ServiceFactory() {
         userService = new UserServiceImpl();
-        hardwareService = new HardwareServiceImpl();
+        hardwareService = new HardwareServiceImpl(userService);
     }
 
     public static synchronized ServiceFactory getInstance() {

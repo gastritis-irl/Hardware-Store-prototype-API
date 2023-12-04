@@ -5,6 +5,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import edu.bbte.idde.bfim2114.backend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.backend.service.HardwareService;
+import edu.bbte.idde.bfim2114.backend.service.ServiceException;
 import edu.bbte.idde.bfim2114.backend.service.ServiceFactory;
 import edu.bbte.idde.bfim2114.backend.service.UserService;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,11 +37,16 @@ public class HardwarePartServlet extends HttpServlet {
         log.info("GET /api/hardwareparts");
 
         if (idParam == null) {
-            Collection<HardwarePart> parts = hardwareService.findAll();
-            String json = gson.toJson(parts);
-            out.print(json);
-            log.info("Returned list of HardwareParts");
-
+            try {
+                Collection<HardwarePart> parts = hardwareService.findAll();
+                String json = gson.toJson(parts);
+                out.print(json);
+                log.info("Returned list of HardwareParts");
+            } catch (ServiceException e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                log.error("Error while finding HardwarePart", e);
+                throw new IOException("Error while finding HardwarePart", e);
+            }
         } else {
             try {
                 Long id = Long.parseLong(idParam);
@@ -58,6 +64,10 @@ public class HardwarePartServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 out.print("{\"error\":\"Invalid ID format\"}");
                 log.error("Invalid ID format received: {}", idParam);
+            } catch (ServiceException e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                log.error("Error while finding HardwarePart", e);
+                throw new IOException("Error while finding HardwarePart", e);
             }
         }
     }
@@ -85,6 +95,10 @@ public class HardwarePartServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.print("{\"error\":\"Invalid JSON format: " + e.getMessage() + "\"}");
             log.error("Invalid JSON format received", e);
+        } catch (ServiceException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            log.error("Error while creating HardwarePart", e);
+            throw new IOException("Error while creating HardwarePart", e);
         }
     }
 
@@ -92,48 +106,73 @@ public class HardwarePartServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idParam = request.getParameter("id");
         response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
         log.info("PUT /api/hardwareparts");
 
         if (idParam == null) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            out.print("{\"error\":\"ID parameter is required\"}");
-            log.error("ID parameter is required");
-        } else {
-            try {
-                Long id = Long.parseLong(idParam);
-                HardwarePart part = hardwareService.findById(id);
-                if (part == null) {
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                    out.print("{\"error\":\"HardwarePart not found\"}");
-                    log.warn("HardwarePart with id: {} not found", id);
-                } else {
-                    try {
-                        HardwarePart updatedPart = gson.fromJson(request.getReader(), HardwarePart.class);
-                        updatedPart.setId(id);
-                        if (hardwareService.isValid(updatedPart)) {
-                            hardwareService.update(updatedPart);
-                            response.setStatus(HttpServletResponse.SC_OK);
-                            String json = gson.toJson(updatedPart);
-                            out.print(json);
-                            log.info("Updated HardwarePart with id: {}", id);
-                        } else {
-                            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                            out.print("{\"error\":\"Invalid HardwarePart data\"}");
-                            log.error("Invalid HardwarePart data provided");
-                        }
-                    } catch (JsonIOException | JsonSyntaxException e) {
-                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        out.print("{\"error\":\"Invalid JSON format: " + e.getMessage() + "\"}");
-                        log.error("Invalid JSON format received", e);
-                    }
-                }
-            } catch (NumberFormatException e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.print("{\"error\":\"Invalid ID format\"}");
-                log.error("Invalid ID format received: {}", idParam);
-            }
+            respondWithBadRequest(response, "ID parameter is required");
+            return;
         }
+
+        try {
+            Long id = Long.parseLong(idParam);
+            updateHardwarePart(id, request, response);
+        } catch (NumberFormatException e) {
+            respondWithBadRequest(response, "Invalid ID format");
+            log.error("Invalid ID format received: {}", idParam);
+        } catch (ServiceException e) {
+            handleErrorUpdatingHardwarePart(response, e);
+        }
+    }
+
+    private void updateHardwarePart(Long id, HttpServletRequest request,
+                                    HttpServletResponse response) throws IOException {
+        HardwarePart part = hardwareService.findById(id);
+        if (part == null) {
+            respondWithNotFound(response);
+            return;
+        }
+
+        try {
+            HardwarePart updatedPart = gson.fromJson(request.getReader(), HardwarePart.class);
+            processHardwarePartUpdate(id, updatedPart, response);
+        } catch (JsonIOException | JsonSyntaxException e) {
+            respondWithBadRequest(response, "Invalid JSON format: " + e.getMessage());
+        }
+    }
+
+    private void processHardwarePartUpdate(Long id, HardwarePart updatedPart,
+                                           HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        updatedPart.setId(id);
+        if (hardwareService.isValid(updatedPart)) {
+            hardwareService.update(updatedPart);
+            response.setStatus(HttpServletResponse.SC_OK);
+            String json = gson.toJson(updatedPart);
+            out.print(json);
+            log.info("Updated HardwarePart with id: {}", id);
+        } else {
+            respondWithBadRequest(response, "Invalid HardwarePart data");
+        }
+    }
+
+    private void respondWithBadRequest(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        PrintWriter out = response.getWriter();
+        out.print("{\"error\":\"" + message + "\"}");
+        log.error(message);
+    }
+
+    private void respondWithNotFound(HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        PrintWriter out = response.getWriter();
+        out.print("{\"error\":\"" + "HardwarePart not found" + "\"}");
+        log.warn("HardwarePart not found");
+    }
+
+    private void handleErrorUpdatingHardwarePart(HttpServletResponse response, ServiceException e) throws IOException {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        log.error("Error while updating HardwarePart", e);
+        throw new IOException("Error while updating HardwarePart", e);
     }
 
     @Override
@@ -147,7 +186,6 @@ public class HardwarePartServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.print("{\"error\":\"ID parameter is required\"}");
             log.error("ID parameter is required");
-
         } else {
             try {
                 Long id = Long.parseLong(idParam);
@@ -156,6 +194,10 @@ public class HardwarePartServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 out.print("{\"error\":\"Invalid ID format\"}");
                 log.error("Invalid ID format received: {}", idParam);
+            } catch (ServiceException e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                log.error("Error while deleting HardwarePart", e);
+                throw new IOException("Error while deleting HardwarePart", e);
             }
         }
     }

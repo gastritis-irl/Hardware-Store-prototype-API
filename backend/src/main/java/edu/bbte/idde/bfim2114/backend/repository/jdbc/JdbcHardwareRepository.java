@@ -6,10 +6,7 @@ import edu.bbte.idde.bfim2114.backend.repository.RepositoryException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -93,22 +90,30 @@ public class JdbcHardwareRepository implements HardwareRepository {
 
     @Override
     public HardwarePart create(HardwarePart entity) {
-        String sql = "INSERT INTO hardware_parts VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO hardware_parts(name, manufacturer, category, price, description, userId) VALUES(?, ?, ?, ?, ?, ?)";
         try (Connection conn = connectionManager.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setLong(1, entity.getId());
-            preparedStatement.setString(2, entity.getName());
-            preparedStatement.setString(3, entity.getManufacturer());
-            preparedStatement.setString(4, entity.getCategory());
-            preparedStatement.setDouble(5, entity.getPrice());
-            preparedStatement.setString(6, entity.getDescription());
-            preparedStatement.setLong(7, entity.getUserId());
+             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PrepareThePrepared(entity, preparedStatement);
             preparedStatement.executeUpdate();
+
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                entity.setId(generatedKeys.getLong(1));
+            }
             return entity;
         } catch (SQLException e) {
             log.error("HardwarePart creation failed!", e);
             throw new RepositoryException("HardwarePart creation failed!", e);
         }
+    }
+
+    private void PrepareThePrepared(HardwarePart entity, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, entity.getName());
+        preparedStatement.setString(2, entity.getManufacturer());
+        preparedStatement.setString(3, entity.getCategory());
+        preparedStatement.setDouble(4, entity.getPrice());
+        preparedStatement.setString(5, entity.getDescription());
+        preparedStatement.setLong(6, entity.getUserId());
     }
 
     @Override
@@ -117,12 +122,7 @@ public class JdbcHardwareRepository implements HardwareRepository {
                 + "category=?, price=?, description=?, userId=? WHERE id=?";
         try (Connection conn = connectionManager.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2, entity.getManufacturer());
-            preparedStatement.setString(3, entity.getCategory());
-            preparedStatement.setDouble(4, entity.getPrice());
-            preparedStatement.setString(5, entity.getDescription());
-            preparedStatement.setLong(6, entity.getUserId());
+            PrepareThePrepared(entity, preparedStatement);
             preparedStatement.setLong(7, entity.getId());
             preparedStatement.executeUpdate();
             return entity;

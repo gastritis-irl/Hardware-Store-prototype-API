@@ -29,7 +29,7 @@ public class JdbcInit {
 
     private void createUsersTable() {
         String sql = "CREATE TABLE IF NOT EXISTS users ("
-                + "id BIGINT PRIMARY KEY,"
+                + "id BIGINT PRIMARY KEY AUTO_INCREMENT,"
                 + "username VARCHAR(255),"
                 + "password VARCHAR(255)"
                 + ")";
@@ -38,7 +38,7 @@ public class JdbcInit {
 
     private void createHardwarePartsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS hardware_parts ("
-                + "id BIGINT PRIMARY KEY,"
+                + "id BIGINT PRIMARY KEY AUTO_INCREMENT,"
                 + "name VARCHAR(255),"
                 + "manufacturer VARCHAR(255),"
                 + "category VARCHAR(255),"

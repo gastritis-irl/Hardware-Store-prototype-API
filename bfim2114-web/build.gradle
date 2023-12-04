@@ -29,6 +29,11 @@ tasks.register('deploy', Copy) {
     dependsOn 'build', 'war'
     from war.archiveFile
     into "${catalinaHome}/webapps"
+
+    doLast {
+        def setenvFile = file("${catalinaHome}/bin/setenv.bat")
+        setenvFile.write("set \"CATALINA_OPTS=-Dprofile=prod -Dinitdb=true\"\n")
+    }
 }
 
 tasks.register('undeploy', Delete) {
