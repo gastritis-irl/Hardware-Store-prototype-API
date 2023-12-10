@@ -1,4 +1,4 @@
-package edu.bbte.idde.bfim2114.backend.service;
+package edu.bbte.idde.bfim2114.springbackend.exception;
 
 import java.io.Serial;
 
