@@ -28,17 +28,17 @@ public class HardwareServiceImpl implements HardwareService {
     @Override
     public boolean isValid(HardwarePart part) {
         if (part == null) {
-            return false;
+            return true;
         }
         Long userId = part.getUser().getId();
 
-        return userService.existsById(userId) && part.getName() != null
-                && !part.getName().isEmpty();
+        return !userService.existsById(userId) || part.getName() == null
+            || part.getName().isEmpty();
     }
 
     @Override
     public HardwarePart create(HardwarePart part) {
-        if (!isValid(part)) {
+        if (isValid(part)) {
             throw new IllegalArgumentException("Invalid HardwarePart");
         }
 
@@ -52,7 +52,7 @@ public class HardwareServiceImpl implements HardwareService {
 
     @Override
     public HardwarePart update(HardwarePart part) {
-        if (!isValid(part)) {
+        if (isValid(part)) {
             throw new IllegalArgumentException("Invalid HardwarePart");
         }
         return hardwareRepository.save(part);
