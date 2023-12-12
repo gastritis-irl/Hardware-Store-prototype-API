@@ -6,6 +6,8 @@ import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.Collection;
+
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface HardwarePartMapper {
     @Mapping(source = "userId", target = "user.id")
@@ -13,4 +15,6 @@ public interface HardwarePartMapper {
 
     @Mapping(source = "user.id", target = "userId")
     HardwarePartOutDTO dtoToHardwarePart(HardwarePart hardwarePart);
+
+    Collection<HardwarePartOutDTO> hardwareParttoOuts(Collection<HardwarePart> parts);
 }
