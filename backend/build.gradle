@@ -15,5 +15,9 @@ dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
-    runtimeOnly group: 'com.mysql', name: 'mysql-connector-j', version: '8.2.0'
 }
+
+def profile = properties.profile ?: 'dev'
+logger.quiet "Detected profile: ${profile}"
+
+apply from: "build-${profile}.gradle"
