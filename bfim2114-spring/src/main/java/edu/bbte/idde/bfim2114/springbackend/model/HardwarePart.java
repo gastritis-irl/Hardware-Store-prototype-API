@@ -27,7 +27,7 @@ public class HardwarePart extends BaseEntity {
     @Column(name = "description", length = 1000)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }

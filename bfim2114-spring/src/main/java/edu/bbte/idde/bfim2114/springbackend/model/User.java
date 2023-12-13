@@ -14,9 +14,9 @@ import lombok.*;
 @NoArgsConstructor
 public class User extends BaseEntity {
 
-    @Column(name = "username", nullable = false, length = 50)
-    private String username;
+    @Column(unique = true, name = "email", nullable = false, length = 50)
+    private String email;
 
-    @Column(name = "password", nullable = false, length = 50)
+    @Column(name = "password", nullable = false, length = 1000)
     private String password;
 }

@@ -2,6 +2,7 @@ package edu.bbte.idde.bfim2114.springbackend.service;
 
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.repository.HardwareRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,7 @@ public class HardwareServiceImpl implements HardwareService {
         return hardwareRepository.save(part);
     }
 
+    @Transactional
     @Override
     public void delete(Long partId) {
 
@@ -61,6 +63,7 @@ public class HardwareServiceImpl implements HardwareService {
         hardwareRepository.deleteById(partId);
     }
 
+    @Transactional
     @Override
     public HardwarePart update(HardwarePart part) {
         if (isValid(part)) {

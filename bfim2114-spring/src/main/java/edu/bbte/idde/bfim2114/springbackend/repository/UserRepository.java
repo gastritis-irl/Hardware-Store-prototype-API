@@ -4,5 +4,5 @@ import edu.bbte.idde.bfim2114.springbackend.model.User;
 
 public interface UserRepository extends BaseRepository<User> {
 
-    User findByUsername(String username);
+    User findByEmail(String username);
 }
