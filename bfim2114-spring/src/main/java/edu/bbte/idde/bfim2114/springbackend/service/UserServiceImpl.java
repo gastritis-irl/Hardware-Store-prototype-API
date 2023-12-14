@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -66,26 +64,33 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterDTO registerDTO) {
         log.info("Registering User: {}", registerDTO);
         User user = new User();
-        user.setEmail(registerDTO.getUsername());
+        user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setRole("USER");
         return userRepository.save(user);
     }
 
     @Override
     public User validateUser(LoginDTO loginDTO) {
-        log.info("Validating User: {}", loginDTO);
-        User user = userRepository.findByEmail(loginDTO.getUsername());
-        if (user != null && passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) { // Check encoded password
+        User user = userRepository.findByEmail(loginDTO.getEmail());
+        if (user != null && passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+            log.info("Valid user: {}", user);
             return user;
         }
+        log.warn("Invalid user: {}", loginDTO);
         return null;
     }
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
+        user.setRole("ROLE_"+user.getRole());
+        return org.springframework.security.core.userdetails.User
+            .withUsername(user.getEmail())
+            .password(user.getPassword())
+            .authorities(user.getRole())
+            .build();
     }
 }

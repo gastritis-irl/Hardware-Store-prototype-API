@@ -3,6 +3,7 @@ package edu.bbte.idde.bfim2114.springbackend.config;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import edu.bbte.idde.bfim2114.springbackend.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class WebSecurityConfig {
 
     private final UserService userService;
@@ -36,6 +38,11 @@ public class WebSecurityConfig {
                     "/api/hardware/**"
                 ).permitAll()
                 .requestMatchers(
+                    "/api/login/**",
+                    "/api/register/**",
+                    "/api/refresh-token/**"
+                ).permitAll()
+                .requestMatchers(
                     HttpMethod.POST, "/api/hardware/**"
                 ).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(
@@ -44,12 +51,6 @@ public class WebSecurityConfig {
                 .requestMatchers(
                     HttpMethod.DELETE, "/api/hardware/**"
                 ).hasAnyRole("USER", "ADMIN")
-                .requestMatchers(
-                    "/api/login"
-                ).permitAll()
-                .requestMatchers(
-                    "/api/register"
-                ).permitAll()
                 .requestMatchers(
                     "/**"
                 ).hasRole("ADMIN")

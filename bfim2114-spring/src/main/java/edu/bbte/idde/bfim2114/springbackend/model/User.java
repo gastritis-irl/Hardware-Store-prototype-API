@@ -19,4 +19,7 @@ public class User extends BaseEntity {
 
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
+
+    @Column(name = "role", nullable = false, length = 50)
+    private String role;
 }

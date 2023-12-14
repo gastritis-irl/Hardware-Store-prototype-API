@@ -6,6 +6,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserService userService;
@@ -22,6 +24,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     public JwtRequestFilter(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/api/login") || path.startsWith("/api/register");
     }
 
     @Override
@@ -38,8 +46,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             username = jwtUtil.extractUsername(jwt);
         }
 
+        log.info("JWT: " + jwt);
+        log.info("Username: " + username);
+
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userService.loadUserByUsername(username);
+            log.info("UserDetails: " + userDetails);
+            log.info("UserDetails.getUsername(): " + userDetails.getUsername());
+            log.info("UserDetails.getPassword(): " + userDetails.getPassword());
+            log.info("UserDetails.getAuthorities(): " + userDetails.getAuthorities());
+
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

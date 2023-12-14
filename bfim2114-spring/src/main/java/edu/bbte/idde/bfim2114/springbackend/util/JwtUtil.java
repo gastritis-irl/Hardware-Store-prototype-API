@@ -30,7 +30,7 @@ public class JwtUtil {
         Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
         return JWT.create()
             .withSubject(userDetails.getUsername())
-            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 + 1))
             .sign(algorithm);
     }
 
