@@ -7,8 +7,12 @@ version = '1.0-SNAPSHOT'
 
 dependencies {
     implementation project(':backend')
+    implementation 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
     compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.0.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+    implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
+
 }
 
 publishing {
@@ -19,14 +23,20 @@ publishing {
     }
 }
 
+def catalinaHome = System.getenv('CATALINA_HOME')
+
 tasks.register('deploy', Copy) {
     dependsOn 'build', 'war'
     from war.archiveFile
-    into "C:/Users/bfcsa/apache-tomcat-10.1.15-windows-x64/apache-tomcat-10.1.15/webapps"
+    into "${catalinaHome}/webapps"
+
+    doLast {
+        def setenvFile = file("${catalinaHome}/bin/setenv.bat")
+        setenvFile.write("set \"CATALINA_OPTS=-Dprofile=prod -Dinitdb=true\"\n")
+    }
 }
 
-
 tasks.register('undeploy', Delete) {
-    delete "C:/Users/bfcsa/apache-tomcat-10.1.15-windows-x64/apache-tomcat-10.1.15/webapps/bfim2114-web-1.0-SNAPSHOT.war"
+    delete "${catalinaHome}/webapps/bfim2114-web-1.0-SNAPSHOT.war"
 }
 
