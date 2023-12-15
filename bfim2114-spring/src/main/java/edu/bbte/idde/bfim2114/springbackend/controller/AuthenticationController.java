@@ -33,7 +33,9 @@ public class AuthenticationController {
         log.info("POST: /api/register");
         User user = userService.registerUser(registerDTO);
         final ResponseEntity<?> jwt = getResponseEntity(user);
-        if (jwt != null) return jwt;
+        if (jwt != null) {
+            return jwt;
+        }
         return ResponseEntity.badRequest().body("Registration failed");
     }
 
@@ -42,7 +44,9 @@ public class AuthenticationController {
         log.info("POST: /api/login");
         User user = userService.validateUser(loginDTO);
         final ResponseEntity<?> jwt = getResponseEntity(user);
-        if (jwt != null) return jwt;
+        if (jwt != null) {
+            return jwt;
+        }
         return ResponseEntity.badRequest().body("Invalid credentials");
     }
 

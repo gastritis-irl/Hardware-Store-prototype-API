@@ -24,5 +24,6 @@ public interface UserService extends UserDetailsService {
 
     User validateUser(LoginDTO loginDTO);
 
+    @Override
     UserDetails loadUserByUsername(String username);
 }

@@ -38,7 +38,8 @@ public class UserController {
     }
 
     @PutMapping("/{username}")
-    public ResponseEntity<UserOutDTO> updateUser(@PathVariable String username, @Valid @RequestBody UserInDTO userInDTO) {
+    public ResponseEntity<UserOutDTO> updateUser(@PathVariable String username,
+                                                 @Valid @RequestBody UserInDTO userInDTO) {
         log.info("PUT: /api/users/{}", username);
         User user = userMapper.dtoToUser(userInDTO);
         User updatedUser = userService.update(user);

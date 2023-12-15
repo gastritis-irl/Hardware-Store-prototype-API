@@ -27,6 +27,8 @@ dependencies {
     annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
     implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
     implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '6.2.0'
+    runtimeOnly group: 'com.h2database', name: 'h2', version: '2.2.224'
+
 }
 
 test {

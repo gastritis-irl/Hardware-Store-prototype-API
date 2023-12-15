@@ -27,6 +27,7 @@ public class WebSecurityConfig {
 
     private final PasswordEncoder passwordEncoder;
 
+    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -60,6 +61,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }

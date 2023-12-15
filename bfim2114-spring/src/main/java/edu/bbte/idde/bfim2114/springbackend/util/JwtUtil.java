@@ -26,8 +26,8 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
-        String SECRET_KEY = "secret";
-        Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
+        final String secret = "secret";
+        Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
             .withSubject(userDetails.getUsername())
             .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 + 1))
@@ -36,6 +36,6 @@ public class JwtUtil {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 }

@@ -32,7 +32,8 @@ public class HardwareController {
     }
 
     @PostMapping
-    public ResponseEntity<HardwarePartOutDTO> createHardwarePart(@Valid @RequestBody HardwarePartInDTO hardwarePartInDTO) {
+    public ResponseEntity<HardwarePartOutDTO> createHardwarePart(@Valid @RequestBody
+                                                                 HardwarePartInDTO hardwarePartInDTO) {
         log.info("POST: /api/hardware");
         HardwarePart hardwarePart = hardwarePartMapper.hardwareParttoDTO(hardwarePartInDTO);
         return ResponseEntity.ok(hardwarePartMapper.dtoToHardwarePart(hardwareService.create(hardwarePart)));
@@ -48,7 +49,10 @@ public class HardwareController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<HardwarePartOutDTO> updateHardwarePart(@PathVariable Long id, @Valid @RequestBody HardwarePartInDTO hardwarePartInDTO) {
+    public ResponseEntity<HardwarePartOutDTO> updateHardwarePart(
+        @PathVariable Long id,
+        @Valid @RequestBody HardwarePartInDTO hardwarePartInDTO
+    ) {
         log.info("PUT: /api/hardware/{}", id);
         HardwarePart hardwarePart = hardwarePartMapper.hardwareParttoDTO(hardwarePartInDTO);
         hardwarePart.setId(id);
