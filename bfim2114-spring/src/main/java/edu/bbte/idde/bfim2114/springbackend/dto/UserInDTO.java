@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class UserInDTO {
 
-    @NotBlank(message = "Username cannot be blank")
-    private String username;
+    @NotBlank(message = "Email cannot be blank")
+    private String email;
 
     @NotBlank(message = "Password cannot be blank")
     @Size(min = 8, message = "Password must be at least 8 characters long")

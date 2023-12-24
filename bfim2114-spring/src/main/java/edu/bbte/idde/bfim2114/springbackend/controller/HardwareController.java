@@ -27,7 +27,7 @@ public class HardwareController {
     public ResponseEntity<Collection<HardwarePartOutDTO>> getAllHardwareParts() {
         log.info("GET: /api/hardware");
         return ResponseEntity.ok(hardwareService.findAll().stream()
-            .map(hardwarePartMapper::dtoToHardwarePart)
+            .map(hardwarePartMapper::hardwarePartToDTO)
             .collect(Collectors.toList()));
     }
 
@@ -35,8 +35,9 @@ public class HardwareController {
     public ResponseEntity<HardwarePartOutDTO> createHardwarePart(@Valid @RequestBody
                                                                  HardwarePartInDTO hardwarePartInDTO) {
         log.info("POST: /api/hardware");
-        HardwarePart hardwarePart = hardwarePartMapper.hardwareParttoDTO(hardwarePartInDTO);
-        return ResponseEntity.ok(hardwarePartMapper.dtoToHardwarePart(hardwareService.create(hardwarePart)));
+        HardwarePart hardwarePart = hardwarePartMapper.dtoToHardwarePart(hardwarePartInDTO);
+        log.info("{}", hardwarePart);
+        return ResponseEntity.ok(hardwarePartMapper.hardwarePartToDTO(hardwareService.create(hardwarePart)));
     }
 
     @GetMapping("/{id}")
@@ -45,7 +46,7 @@ public class HardwareController {
         if (hardwareService.findById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(hardwarePartMapper.dtoToHardwarePart(hardwareService.findById(id).get()));
+        return ResponseEntity.ok(hardwarePartMapper.hardwarePartToDTO(hardwareService.findById(id).get()));
     }
 
     @PutMapping("/{id}")
@@ -54,13 +55,13 @@ public class HardwareController {
         @Valid @RequestBody HardwarePartInDTO hardwarePartInDTO
     ) {
         log.info("PUT: /api/hardware/{}", id);
-        HardwarePart hardwarePart = hardwarePartMapper.hardwareParttoDTO(hardwarePartInDTO);
+        HardwarePart hardwarePart = hardwarePartMapper.dtoToHardwarePart(hardwarePartInDTO);
         hardwarePart.setId(id);
         HardwarePart updatedHardwarePart = hardwareService.update(hardwarePart);
         if (updatedHardwarePart == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(hardwarePartMapper.dtoToHardwarePart(updatedHardwarePart));
+        return ResponseEntity.ok(hardwarePartMapper.hardwarePartToDTO(updatedHardwarePart));
     }
 
     @DeleteMapping("/{id}")

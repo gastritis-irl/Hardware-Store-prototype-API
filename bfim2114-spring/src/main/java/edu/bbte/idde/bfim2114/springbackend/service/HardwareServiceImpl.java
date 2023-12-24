@@ -50,9 +50,18 @@ public class HardwareServiceImpl implements HardwareService {
             log.error("Invalid HardwarePart");
             throw new IllegalArgumentException("Invalid HardwarePart");
         }
+        addHardwarePartToUser(part);
 
         log.info("Creating HardwarePart: {}", part);
         return hardwareRepository.save(part);
+    }
+
+    private void addHardwarePartToUser(HardwarePart part) {
+        userService.addHardwarePart(part.getUser(), part);
+    }
+
+    private void removeHardwarePartFromUser(HardwarePart part) {
+        userService.removeHardwarePart(part.getUser(), part);
     }
 
     @Transactional
@@ -60,6 +69,8 @@ public class HardwareServiceImpl implements HardwareService {
     public void delete(Long partId) {
 
         log.info("Deleting HardwarePart by id: {}", partId);
+        Optional<HardwarePart> part = hardwareRepository.findById(partId);
+        part.ifPresent(this::removeHardwarePartFromUser);
         hardwareRepository.deleteById(partId);
     }
 
@@ -70,6 +81,7 @@ public class HardwareServiceImpl implements HardwareService {
             log.error("Invalid HardwarePart");
             throw new IllegalArgumentException("Invalid HardwarePart");
         }
+        addHardwarePartToUser(part);
         log.info("Updating HardwarePart: {}", part);
         return hardwareRepository.save(part);
     }

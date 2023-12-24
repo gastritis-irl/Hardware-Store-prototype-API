@@ -21,7 +21,7 @@ public class JwtUtil {
         return jwt.getExpiresAt();
     }
 
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
@@ -30,7 +30,7 @@ public class JwtUtil {
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
             .withSubject(userDetails.getUsername())
-            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 + 1))
+            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
             .sign(algorithm);
     }
 

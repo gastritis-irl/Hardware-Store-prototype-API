@@ -1,5 +1,6 @@
 package edu.bbte.idde.bfim2114.springbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,7 +28,8 @@ public class HardwarePart extends BaseEntity {
     @Column(name = "description", length = 1000)
     private String description;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;
 }

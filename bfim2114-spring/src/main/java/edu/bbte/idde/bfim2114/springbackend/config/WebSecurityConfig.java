@@ -35,7 +35,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers(HttpMethod.GET,
-                    "/api/users/**",
+                    "/api/user/**",
                     "/api/hardware/**"
                 ).permitAll()
                 .requestMatchers(
@@ -51,6 +51,9 @@ public class WebSecurityConfig {
                 ).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(
                     HttpMethod.DELETE, "/api/hardware/**"
+                ).hasAnyRole("USER", "ADMIN")
+                .requestMatchers(
+                    HttpMethod.POST, "/api/logout/**"
                 ).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(
                     "/**"

@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,25 +57,59 @@ public class AuthenticationController {
             UserDetails userDetails = org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
-                .roles(user.getRole())
-                .authorities(new ArrayList<>())
+                .authorities(user.getRole())
                 .build();
             final String jwt = jwtUtil.generateToken(userDetails);
-            return ResponseEntity.ok().body(jwt);
+
+            return createResponseEntity(jwt, userDetails, user);
         }
         return null;
+    }
+
+    private ResponseEntity<?> createResponseEntity(String jwt, UserDetails userDetails, User user) {
+        Map<String, Object> responseData = new ConcurrentHashMap<>();
+        responseData.put("token", jwt);
+        responseData.put("role", user.getRole());
+        responseData.put("email", userDetails.getUsername());
+        responseData.put("expirationDate", jwtUtil.extractExpiration(jwt));
+        responseData.put("id", user.getId());
+        return ResponseEntity.ok().body(responseData);
     }
 
     @PostMapping("/api/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String token) {
         log.info("POST: /api/refresh-token");
         String username = jwtUtil.extractUsername(token.substring(7));
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        }
         UserDetails userDetails = userService.loadUserByUsername(username);
         if (jwtUtil.validateToken(token.substring(7), userDetails)) {
             String newToken = jwtUtil.generateToken(userDetails);
-            return ResponseEntity.ok().body(newToken);
+            return createResponseEntity(newToken, userDetails, user);
+        } else {
+            if (jwtUtil.isTokenExpired(token.substring(7)) && username.equals(userDetails.getUsername())) {
+                log.info("Token is expired, generating new token");
+                String newToken = jwtUtil.generateToken(userDetails);
+                return createResponseEntity(newToken, userDetails, user);
+            }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
     }
+
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String token) {
+        log.info("POST: /api/logout");
+
+        // jwtUtil.invalidateToken(token.substring(7));
+
+        String username = jwtUtil.extractUsername(token.substring(7));
+        log.info("User " + username + " logged out.");
+
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

@@ -2,6 +2,7 @@ package edu.bbte.idde.bfim2114.springbackend.service;
 
 import edu.bbte.idde.bfim2114.springbackend.dto.LoginDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.RegisterDTO;
+import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.model.User;
 import edu.bbte.idde.bfim2114.springbackend.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+
+    @Override
+    public User findById(Long id) {
+
+        log.info("Finding User by id: {}", id);
+        return userRepository.findById(id).orElse(null);
+    }
 
     @Override
     public User findByUsername(String username) {
@@ -56,6 +67,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addHardwarePart(User user, HardwarePart part) {
+        log.info("Adding HardwarePart: {} to User: {}", part, user);
+        if (user.getHardwareParts() == null) {
+            user.setHardwareParts(new ArrayList<>());
+        }
+        user.addHardwarePart(part);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void removeHardwarePart(User user, HardwarePart part) {
+        log.info("Removing HardwarePart: {} from User: {}", part, user);
+        user.removeHardwarePart(part);
+        userRepository.save(user);
+    }
+
+    @Override
     public boolean isAdmin(String username) {
         return "admin".equals(username);
     }
@@ -67,6 +95,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setRole("USER");
+        user.setHardwareParts(new ArrayList<>());
         return userRepository.save(user);
     }
 
@@ -79,6 +108,11 @@ public class UserServiceImpl implements UserService {
         }
         log.warn("Invalid user: {}", loginDTO);
         return null;
+    }
+
+    @Override
+    public Collection<HardwarePart> getHardwareParts(User user) {
+        return user.getHardwareParts();
     }
 
     @Override

@@ -3,6 +3,7 @@ package edu.bbte.idde.bfim2114.springbackend.controller;
 import edu.bbte.idde.bfim2114.springbackend.dto.UserInDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.UserOutDTO;
 import edu.bbte.idde.bfim2114.springbackend.mapper.UserMapper;
+import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.model.User;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import jakarta.validation.Valid;
@@ -11,10 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -28,13 +31,6 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(userMapper.userToDTo(user));
-    }
-
-    @PostMapping
-    public ResponseEntity<UserOutDTO> createUser(@Valid @RequestBody UserInDTO userInDTO) {
-        log.info("POST: /api/users");
-        User user = userMapper.dtoToUser(userInDTO);
-        return ResponseEntity.ok(userMapper.userToDTo(userService.create(user)));
     }
 
     @PutMapping("/{username}")
@@ -54,5 +50,12 @@ public class UserController {
         log.info("DELETE: /api/users/{}", id);
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/hardware")
+    public ResponseEntity<Collection<HardwarePart>> getHardwareParts(@PathVariable Long id) {
+        log.info("GET: /api/users/{}/hardware", id);
+        Collection<HardwarePart> hardwareParts = userService.getHardwareParts(userService.findById(id));
+        return ResponseEntity.ok(hardwareParts);
     }
 }

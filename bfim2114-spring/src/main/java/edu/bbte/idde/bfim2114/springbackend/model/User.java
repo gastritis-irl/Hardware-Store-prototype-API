@@ -1,9 +1,10 @@
 package edu.bbte.idde.bfim2114.springbackend.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,16 @@ public class User extends BaseEntity {
 
     @Column(name = "role", nullable = false, length = 50)
     private String role;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Collection<HardwarePart> hardwareParts;
+
+    public void addHardwarePart(HardwarePart hardwarePart) {
+        hardwareParts.add(hardwarePart);
+    }
+
+    public void removeHardwarePart(HardwarePart hardwarePart) {
+        hardwareParts.remove(hardwarePart);
+    }
 }

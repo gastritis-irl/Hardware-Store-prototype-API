@@ -26,12 +26,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        return path.startsWith("/api/login") || path.startsWith("/api/register");
+        return path.startsWith("/api/login")
+            || path.startsWith("/api/register")
+            || path.startsWith("/api/refresh-token");
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         throws ServletException, IOException {
+        // log request
+        log.info("Request: {} {}", request.getMethod(), request.getRequestURI());
 
         final String authorizationHeader = request.getHeader("Authorization");
 
