@@ -1,0 +1,4 @@
+
+dependencies {
+    runtimeOnly group: 'com.mysql', name: 'mysql-connector-j', version: '8.2.0'
+}
