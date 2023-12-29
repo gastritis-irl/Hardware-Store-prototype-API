@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "name": "CPU",
+    "manufacturer": "Intel",
+    "category": "Core i7-10700K",
+    "price": 500.0,
+    "description": "Core processors are designed for what's next - the ultimate productivity, creativity, and gaming. 10th Gen Intel® Core™ processors with Intel® Iris® Plus graphics and Intel® UHD Graphics bring immersive, visually stunning experiences to laptops.",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "GPU",
+    "manufacturer": "Nvidia",
+    "category": "GeForce RTX 3080",
+    "price": 1000.0,
+    "description": "The GeForce RTX™ 3080 delivers the ultra performance that gamers crave, powered by Ampere—NVIDIA's 2nd gen RTX architecture. It's built with enhanced RT Cores and Tensor Cores, new streaming multiprocessors, and superfast G6X memory for an amazing gaming experience.",
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "name": "RAM",
+    "manufacturer": "Corsair",
+    "category": "Vengeance LPX 16GB",
+    "price": 100.0,
+    "description": "VENGEANCE LPX memory is designed for high-performance overclocking. The heatspreader is made of pure aluminum for faster heat dissipation, and the custom performance PCB helps manage heat and provides superior overclocking headroom. Each IC is individually screened for performance potential.",
+    "userId": 1
+  },
+  {
+    "id": 4,
+    "name": "Motherboard",
+    "manufacturer": "Asus",
+    "category": "ROG Strix Z490-E",
+    "price": 300.0,
+    "description": "ROG Strix Z490-E Gaming motherboard features boosted power delivery, optimized cooling, and AI Overclocking, AI Cooling and AI Networking. Robust power and effective cooling make the ROG Strix Z490-E Gaming the perfect partner for 10th Generation Intel® Core™ processors. With an intelligent cooling system featuring onboard sensors and optimal fan calibration, it's easy to configure and cool your gaming rig to handle the heaviest workloads.",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "PSU",
+    "manufacturer": "Corsair",
+    "category": "RMx Series RM750x",
+    "price": 150.0,
+    "description": "CORSAIR RM750x series power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RM750x PSUs' long life and reliability, backed by a ten-year warranty. Zero RPM Mode means an RM750x series PSU is virtually silent at low and medium loads, and even at maximum power, a low noise fan ensures quiet operation.",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "name": "SSD",
+    "manufacturer": "Samsung",
+    "category": "970 EVO Plus 1TB",
+    "price": 200.0,
+    "description": "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing. Comes in capacities of up to 2TB, with reliability of up to 1,200 TBW.",
+    "userId": 1
+  },
+  {
+    "id": 7,
+    "name": "HDD",
+    "manufacturer": "Seagate",
+    "category": "BarraCuda 2TB",
+    "price": 50.0,
+    "description": "Versatile, fast and dependable, the BarraCuda Pro drives are the latest generation of an ultra-reliable product family spanning 20 years. Backed by a 5-year limited warranty and a standard 2-year Rescue Data Recovery plan.",
+    "userId": 1
+  },
+  {
+    "id": 8,
+    "name": "Case",
+    "manufacturer": "Corsair",
+    "category": "iCUE 4000X RGB",
+    "price": 150.0,
+    "description": "The CORSAIR iCUE 4000X RGB is a distinctive and customizable tempered glass mid-tower ATX case with easy cable management and exceptional cooling, with three included CORSAIR AirGuide RGB fans.",
+    "userId": 1
+  },
+  {
+    "id": 9,
+    "name": "Cooler",
+    "manufacturer": "Corsair",
+    "category": "iCUE H150i Elite Capellix",
+    "price": 150.0,
+    "description": "The CORSAIR iCUE H150i ELITE CAPELLIX Liquid CPU Cooler delivers powerful, low-noise cooling for your CPU, with a 360mm radiator, three CORSAIR ML120 RGB PWM fans, and an ultra-bright CAPELLIX RGB pump head.",
+    "userId": 1
+  },
+  {
+    "id": 10,
+    "name": "Monitor",
+    "manufacturer": "Asus",
+    "category": "ROG Swift PG259QN",
+    "price": 700.0,
+    "description": "ROG Swift 360Hz PG259QN is the perfect gaming monitor for esports and fast-paced action games. This FHD (1920 x 1080) display features a Fast IPS panel with up to a 360 Hz refresh rate, 1 ms gray-to-gray (GTG) response time and NVIDIA® G-SYNC® processor for silky-smooth gameplay and ultra-realistic visuals. And of course, it has that distinct ROG design that lets everyone know that this is no ordinary gaming monitor.",
+    "userId": 1
+  },
+  {
+    "id": 11,
+    "name": "Keyboard",
+    "manufacturer": "Corsair",
+    "category": "K100 RGB",
+    "price": 200.0,
+    "description": "The CORSAIR K100 RGB is the pinnacle of CORSAIR keyboards, offering the cutting-edge performance, style, durability, and customization that gamers need to stand above the rest.",
+    "userId": 1
+  },
+  {
+    "id": 12,
+    "name": "Mouse",
+    "manufacturer": "Corsair",
+    "category": "Dark Core RGB Pro",
+    "price": 100.0,
+    "description": "The CORSAIR DARK CORE RGB PRO helps you win without wires, boasting sub-1ms SLIPSTREAM WIRELESS, a custom 18,000 DPI optical sensor optimized for wireless mice, and hyper-polling technology up to 2,000Hz.",
+    "userId": 1
+  },
+  {
+    "id": 13,
+    "name": "Headset",
+    "manufacturer": "Corsair",
+    "category": "Virtuoso RGB Wireless",
+    "price": 200.0,
+    "description": "The CORSAIR Virtuoso RGB Wireless delivers a high-fidelity audio experience, all-day comfort from its premium memory foam earpads, and hyper-fast connectivity with SLIPSTREAM WIRELESS technology.",
+    "userId": 1
+  },
+  {
+    "id": 14,
+    "name": "Mousepad",
+    "manufacturer": "Corsair",
+    "category": "MM800 RGB Polaris",
+    "price": 50.0,
+    "description": "The MM800 RGB POLARIS builds on CORSAIR mouse pad durability, tracking, and precision with a whole new level of LED immersion. A low friction micro-texture surface combined with ample surface area (350mm x 260mm x 5mm) provides pixel-precise tracking no matter what gameplay. 15 individual RGB zones are powered by true PWM lighting, providing the most accurate color representation. Synchronize each of the lighting zones with other CORSAIR RGB products with CUE software to complete the ultimate gaming setup.",
+    "userId": 1
+  },
+  {
+    "id": 15,
+    "name": "Webcam",
+    "manufacturer": "Logitech",
+    "category": "C922 Pro Stream",
+    "price": 100.0,
+    "description": "Stream and record vibrant, true-to-life HD 1080p video at 30 frames per second or 720p at 60fps. Background replacement technology (powered by Personify) allows you to integrate your live image and any background scene, right onto your stream (only works with Windows 7 and above). Full HD glass lens and premium autofocus deliver razor-sharp, clear video in consistent high definition while two built-in mics capture your voice in rich stereo audio.",
+    "userId": 1
+  },
+  {
+    "id": 16,
+    "name": "Microphone",
+    "manufacturer": "Blue",
+    "category": "Yeti",
+    "price": 100.0,
+    "description": "Yeti is the most advanced and versatile multi-pattern USB microphone available anywhere. Combining three capsules and four different pattern settings, Yeti is the ultimate tool for creating amazing recordings, directly to your computer. With all new total blackout finish, Blackout Yeti adds style and energy to your recording or broadcasting setup. Blackout Yeti can capture anything with a clarity and ease unheard of in a USB microphone. Featuring Blue's innovative triple capsule array, Blackout Yeti can record in stereo or your choice of three other unique patterns, including cardioid, omnidirectional, and bidirectional. Blackout Yeti utilizes a high quality A-D converter, a built-in headphone amplifier for zero-latency monitoring, and direct controls for headphone volume, pattern selection, instant mute, and microphone gain. With no drivers to install, Blackout Yeti is the most versatile USB mic lighting up the airwaves today.",
+    "userId": 1
+  },
+  {
+    "id": 17,
+    "name": "Speakers",
+    "manufacturer": "Logitech",
+    "category": "Z906",
+    "price": 300.0,
+    "description": "Hear every detail, all around you - this THX-Certified system delivers theater-quality surround sound for your movies, games and music. Lots of watts You get big, bold sound and details galore from these 500-watt, THX-Certified speakers with 5.1 digital decoding. Plug it in No need to plug and unplug your components - you can connect up to six at once for easy access to all your audio. You run the show You've got total control over your audio experience with an easy-to-read-and-stack digital control console and a wireless remote.",
+    "userId": 1
+  },
+  {
+    "id": 18,
+    "name": "UPS",
+    "manufacturer": "APC",
+    "category": "Back-UPS Pro 1500",
+    "price": 300.0,
+    "description": "The Back-UPS Pro family offers guaranteed power protection for high performance computer systems, routers/modems, external storage devices, game consoles and other electronics in your home or business. These UPSs supply electronics with abundant battery backup during outages and stabilize unsafe voltage levels. They also provide power protection from damaging surges and spikes, and allow the use of management software so you get the most out of your UPS. Premium features of this family may include Automatic Voltage Regulation (AVR), an LCD display, Smart Outlets, energy saving functions that reduce electricity use, network manageability, Watchdog, or configurable outlets. Together with the rest of the Back-UPS Pro's standard features, they are the perfect choice to protect your data and keep your system available.",
+    "userId": 1
+  },
+  {
+    "id": 19,
+    "name": "Router",
+    "manufacturer": "Asus",
+    "category": "RT-AX86U",
+    "price": 300.0,
+    "description": "The battle-ready ROG Rapture GT-AC5300 router is designed with just one mission in mind: Make your gaming network awesome. It's packed with powerful gaming optimizations, and delivers dominating Wi-Fi performance, rock-solid stability and state-of-the-art security. The ROG-themed Gaming Center interface provides easy point-and-click control over every incredible feature. Game Dashboard provides a real-time heads-up about all of your devices and connections, while Game IPS (Intrusion Prevention System) and Game Boost are the command centers for frontline network security and high-performance game acceleration.",
+    "userId": 1
+  },
+  {
+    "id": 20,
+    "name": "Modem",
+    "manufacturer": "Motorola",
+    "category": "MB8600",
+    "price": 150.0,
+    "description": "The Motorola Model MB8600 cable modem supports ultra fast DOCSIS 3.1, the only cable modem standard that can deliver Internet speeds of 1Gbps or higher, up to many gigabits per second. Actual speeds depend on your cable modem service and the speed of your Ethernet LAN ports. MB8600 also has 32x8 support for the fastest possible speeds using the DOCSIS 3.0 standard. Even if you don't have DOCSIS 3.1 service now, you can benefit from the 32x8 DOCSIS 3.0 capability that's also built into this cable modem.",
+    "userId": 1
+  },
+  {
+    "id": 21,
+    "name": "Switch",
+    "manufacturer": "Netgear",
+    "category": "GS308T",
+    "price": 50.0,
+    "description": "The NETGEAR GS308T 8-Port Gigabit Smart Managed Pro Switch comes with 2 dedicated Gigabit SFP ports for fiber uplinks. Fanless, the GS308T is optimized for noise-sensitive environments. NETGEAR Smart Managed Pro Switches offer powerful Layer 2 features, great PoE functionality, and enhanced performance and usability. These switches are the ideal solution even for the most advanced small and medium organizations looking for the best combination of features, performance, and value: they are purposely designed for converged networks where voice, video, data are all carried on a single network platform. Optimized for network efficiency, operational cost savings, and ease of management, these switches are the ideal solution for the most advanced small and medium organizations.",
+    "userId": 1
+  },
+  {
+    "id": 22,
+    "name": "Access Point",
+    "manufacturer": "Ubiquiti",
+    "category": "UniFi AP AC Pro",
+    "price": 150.0,
+    "description": "The UniFi AC Pro AP features the latest Wi-Fi 802.11ac, 3x3 MIMO technology in a refined industrial design and is ideal for deployment of maximum‑performance wireless networks.",
+    "userId": 1
+  },
+  {
+    "id": 23,
+    "name": "Firewall",
+    "manufacturer": "Ubiquiti",
+    "category": "UniFi Dream Machine Pro",
+    "price": 400.0,
+    "description": "The UniFi Dream Machine Pro is an all-in-one network appliance for a scalable network in an office, retail, or hospitality environment. Powered by a fast 1.7 GHz quad-core processor, the UDM Pro combines multiple functions into a single device:",
+    "userId": 1
+  },
+  {
+    "id": 24,
+    "name": "Rack",
+    "manufacturer": "StarTech",
+    "category": "RK1236BKF",
+    "price": 200.0,
+    "description": "Store your servers, network and telecommunications equipment in this adjustable 36U open-frame rack. This 2-post adjustable depth open frame rack provides a durable, open air housing for rackmount servers and networking equipment. The equipment rack/cabinet features heavy gauge mounting rails to ensure a stable installation platform and adjustable posts for flexible installation.",
+    "userId": 1
+  },
+  {
+    "id": 25,
+    "name": "UPS",
+    "manufacturer": "APC",
+    "category": "Smart-UPS 1500VA",
+    "price": 300.0,
+    "description": "APC Smart-UPS protects your data by supplying reliable, network-grade power in either traditional Tower or Rack-optimized form factors for space constrained business critical applications. Award winning APC Smart-UPS is the perfect UPS for protecting business critical fileservers (Intel or UNIX based), minicomputers, network switches and hubs, Point of Sale, retail/bank back office and ATMs. With included PowerChute management software for servers and workstations, IT administrators can provide safe system shutdown and advanced UPS management (all major operating systems supported). Connect additional batteries to your UPS to provide extended runtime in the event of a power outage. With an APC Extended Battery Module (EBM) you can significantly increase runtime. Hot-swappable batteries ensure clean, uninterrupted power to protected equipment while batteries are being replaced.",
+    "userId": 1
+  },
+  {
+    "id": 26,
+    "name": "Router",
+    "manufacturer": "Asus",
+    "category": "RT-AX86U",
+    "price": 300.0,
+    "description": "The battle-ready ROG Rapture GT-AC5300 router is designed with just one mission in mind: Make your gaming network awesome. It's packed with powerful gaming optimizations, and delivers dominating Wi-Fi performance, rock-solid stability and state-of-the-art security. The ROG-themed Gaming Center interface provides easy point-and-click control over every incredible feature. Game Dashboard provides a real-time heads-up about all of your devices and connections, while Game IPS (Intrusion Prevention System) and Game Boost are the command centers for frontline network security and high-performance game acceleration.",
+    "userId": 1
+  },
+  {
+    "id": 27,
+    "name": "Modem",
+    "manufacturer": "Motorola",
+    "category": "MB8600",
+    "price": 150.0,
+    "description": "The Motorola Model MB8600 cable modem supports ultra fast DOCSIS 3.1, the only cable modem standard that can deliver Internet speeds of 1Gbps or higher, up to many gigabits per second. Actual speeds depend on your cable modem service and the speed of your Ethernet LAN ports. MB8600 also has 32x8 support for the fastest possible speeds using the DOCSIS 3.0 standard. Even if you don't have DOCSIS 3.1 service now, you can benefit from the 32x8 DOCSIS 3.0 capability that's also built into this cable modem.",
+    "userId": 1
+  },
+  {
+    "id": 28,
+    "name": "Switch",
+    "manufacturer": "Netgear",
+    "category": "GS308T",
+    "price": 50.0,
+    "description": "The NETGEAR GS308T 8-Port Gigabit Smart Managed Pro Switch comes with 2 dedicated Gigabit SFP ports for fiber uplinks. Fanless, the GS308T is optimized for noise-sensitive environments. NETGEAR Smart Managed Pro Switches offer powerful Layer 2 features, great PoE functionality, and enhanced performance and usability. These switches are the ideal solution even for the most advanced small and medium organizations looking for the best combination of features, performance, and value: they are purposely designed for converged networks where voice, video, data are all carried on a single network platform. Optimized for network efficiency, operational cost savings, and ease of management, these switches are the ideal solution for the most advanced small and medium organizations.",
+    "userId": 1
+  }
+]

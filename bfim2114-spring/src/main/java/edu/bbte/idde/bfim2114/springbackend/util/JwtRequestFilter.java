@@ -1,7 +1,6 @@
-package edu.bbte.idde.bfim2114.springbackend.config;
+package edu.bbte.idde.bfim2114.springbackend.util;
 
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
-import edu.bbte.idde.bfim2114.springbackend.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

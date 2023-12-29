@@ -1,6 +1,7 @@
 package edu.bbte.idde.bfim2114.springbackend.config;
 
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
+import edu.bbte.idde.bfim2114.springbackend.util.JwtRequestFilter;
 import edu.bbte.idde.bfim2114.springbackend.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

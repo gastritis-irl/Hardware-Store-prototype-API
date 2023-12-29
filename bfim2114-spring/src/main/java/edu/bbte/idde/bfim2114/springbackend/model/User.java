@@ -25,7 +25,8 @@ public class User extends BaseEntity {
     private String role;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Collection<HardwarePart> hardwareParts;
 
     public void addHardwarePart(HardwarePart hardwarePart) {
