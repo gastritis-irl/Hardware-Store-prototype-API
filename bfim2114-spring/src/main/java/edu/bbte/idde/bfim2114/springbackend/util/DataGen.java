@@ -51,7 +51,7 @@ public class DataGen {
         Resource resource = new ClassPathResource("DataGen.json");
         File jsonFile = resource.getFile();
         List<HardwarePartOutDTO> hardwareParts = mapper.readValue(jsonFile,
-            new TypeReference<>() {
+            new TypeReference<List<HardwarePartOutDTO>>() {
             });
 
 
