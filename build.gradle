@@ -1,8 +1,15 @@
 subprojects {
     apply plugin: 'java'
+//    apply plugin: 'wrapper'
 
     repositories {
         mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
     }
 
     dependencies {
