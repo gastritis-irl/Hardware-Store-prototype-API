@@ -2,7 +2,7 @@ package edu.bbte.idde.bfim2114.springbackend.config;
 
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import edu.bbte.idde.bfim2114.springbackend.util.JwtRequestFilter;
-import edu.bbte.idde.bfim2114.springbackend.util.JwtUtil;
+import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 
     private final UserService userService;
 
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -61,7 +61,7 @@ public class WebSecurityConfig {
                 ).hasRole("ADMIN")
                 .anyRequest().authenticated(
                 ))
-            .addFilterBefore(new JwtRequestFilter(userService, jwtUtil), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new JwtRequestFilter(userService, jwtService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

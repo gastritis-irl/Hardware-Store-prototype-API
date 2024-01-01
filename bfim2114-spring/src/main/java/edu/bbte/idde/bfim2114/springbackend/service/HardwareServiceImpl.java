@@ -30,7 +30,6 @@ public class HardwareServiceImpl implements HardwareService {
     @Override
     public Optional<HardwarePart> findById(Long partId) {
 
-        log.info("Finding HardwarePart by id: {}", partId);
         return hardwareRepository.findById(partId);
     }
 

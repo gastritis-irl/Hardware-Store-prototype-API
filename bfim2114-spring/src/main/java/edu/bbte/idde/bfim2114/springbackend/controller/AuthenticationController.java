@@ -4,7 +4,7 @@ import edu.bbte.idde.bfim2114.springbackend.dto.LoginDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.RegisterDTO;
 import edu.bbte.idde.bfim2114.springbackend.model.User;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
-import edu.bbte.idde.bfim2114.springbackend.util.JwtUtil;
+import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class AuthenticationController {
 
     private final UserService userService;
 
-    private final JwtUtil jwtUtil;
+    private final JwtService jwtService;
 
     @PostMapping("/api/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO registerDTO) {
@@ -59,7 +59,7 @@ public class AuthenticationController {
                 .password(user.getPassword())
                 .authorities(user.getRole())
                 .build();
-            final String jwt = jwtUtil.generateToken(userDetails);
+            final String jwt = jwtService.generateToken(userDetails);
 
             return createResponseEntity(jwt, userDetails, user);
         }
@@ -71,7 +71,7 @@ public class AuthenticationController {
         responseData.put("token", jwt);
         responseData.put("role", user.getRole());
         responseData.put("email", userDetails.getUsername());
-        responseData.put("expirationDate", jwtUtil.extractExpiration(jwt));
+        responseData.put("expirationDate", jwtService.extractExpiration(jwt));
         responseData.put("id", user.getId());
         return ResponseEntity.ok().body(responseData);
     }
@@ -79,19 +79,19 @@ public class AuthenticationController {
     @PostMapping("/api/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String token) {
         log.info("POST: /api/refresh-token");
-        String username = jwtUtil.extractUsername(token.substring(7));
+        String username = jwtService.extractUsername(token.substring(7));
         User user = userService.findByUsername(username);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
         UserDetails userDetails = userService.loadUserByUsername(username);
-        if (jwtUtil.validateToken(token.substring(7), userDetails)) {
-            String newToken = jwtUtil.generateToken(userDetails);
+        if (jwtService.validateToken(token.substring(7), userDetails)) {
+            String newToken = jwtService.generateToken(userDetails);
             return createResponseEntity(newToken, userDetails, user);
         } else {
-            if (jwtUtil.isTokenExpired(token.substring(7)) && username.equals(userDetails.getUsername())) {
+            if (jwtService.isTokenExpired(token.substring(7)) && username.equals(userDetails.getUsername())) {
                 log.info("Token is expired, generating new token");
-                String newToken = jwtUtil.generateToken(userDetails);
+                String newToken = jwtService.generateToken(userDetails);
                 return createResponseEntity(newToken, userDetails, user);
             }
         }
@@ -104,7 +104,7 @@ public class AuthenticationController {
 
         // jwtUtil.invalidateToken(token.substring(7));
 
-        String username = jwtUtil.extractUsername(token.substring(7));
+        String username = jwtService.extractUsername(token.substring(7));
         log.info("User " + username + " logged out.");
 
 
