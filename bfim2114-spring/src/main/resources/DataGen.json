@@ -1,254 +1,328 @@
-[
-  {
-    "id": 1,
-    "name": "CPU",
-    "manufacturer": "Intel",
-    "category": "Core i7-10700K",
-    "price": 500.0,
-    "description": "Core processors are designed for what's next - the ultimate productivity, creativity, and gaming. 10th Gen Intel® Core™ processors with Intel® Iris® Plus graphics and Intel® UHD Graphics bring immersive, visually stunning experiences to laptops.",
-    "userId": 1
-  },
-  {
-    "id": 2,
-    "name": "GPU",
-    "manufacturer": "Nvidia",
-    "category": "GeForce RTX 3080",
-    "price": 1000.0,
-    "description": "The GeForce RTX™ 3080 delivers the ultra performance that gamers crave, powered by Ampere—NVIDIA's 2nd gen RTX architecture. It's built with enhanced RT Cores and Tensor Cores, new streaming multiprocessors, and superfast G6X memory for an amazing gaming experience.",
-    "userId": 1
-  },
-  {
-    "id": 3,
-    "name": "RAM",
-    "manufacturer": "Corsair",
-    "category": "Vengeance LPX 16GB",
-    "price": 100.0,
-    "description": "VENGEANCE LPX memory is designed for high-performance overclocking. The heatspreader is made of pure aluminum for faster heat dissipation, and the custom performance PCB helps manage heat and provides superior overclocking headroom. Each IC is individually screened for performance potential.",
-    "userId": 1
-  },
-  {
-    "id": 4,
-    "name": "Motherboard",
-    "manufacturer": "Asus",
-    "category": "ROG Strix Z490-E",
-    "price": 300.0,
-    "description": "ROG Strix Z490-E Gaming motherboard features boosted power delivery, optimized cooling, and AI Overclocking, AI Cooling and AI Networking. Robust power and effective cooling make the ROG Strix Z490-E Gaming the perfect partner for 10th Generation Intel® Core™ processors. With an intelligent cooling system featuring onboard sensors and optimal fan calibration, it's easy to configure and cool your gaming rig to handle the heaviest workloads.",
-    "userId": 1
-  },
-  {
-    "id": 5,
-    "name": "PSU",
-    "manufacturer": "Corsair",
-    "category": "RMx Series RM750x",
-    "price": 150.0,
-    "description": "CORSAIR RM750x series power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC. Using only Japanese 105°C capacitors, users can depend on an RM750x PSUs' long life and reliability, backed by a ten-year warranty. Zero RPM Mode means an RM750x series PSU is virtually silent at low and medium loads, and even at maximum power, a low noise fan ensures quiet operation.",
-    "userId": 1
-  },
-  {
-    "id": 6,
-    "name": "SSD",
-    "manufacturer": "Samsung",
-    "category": "970 EVO Plus 1TB",
-    "price": 200.0,
-    "description": "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing. Comes in capacities of up to 2TB, with reliability of up to 1,200 TBW.",
-    "userId": 1
-  },
-  {
-    "id": 7,
-    "name": "HDD",
-    "manufacturer": "Seagate",
-    "category": "BarraCuda 2TB",
-    "price": 50.0,
-    "description": "Versatile, fast and dependable, the BarraCuda Pro drives are the latest generation of an ultra-reliable product family spanning 20 years. Backed by a 5-year limited warranty and a standard 2-year Rescue Data Recovery plan.",
-    "userId": 1
-  },
-  {
-    "id": 8,
-    "name": "Case",
-    "manufacturer": "Corsair",
-    "category": "iCUE 4000X RGB",
-    "price": 150.0,
-    "description": "The CORSAIR iCUE 4000X RGB is a distinctive and customizable tempered glass mid-tower ATX case with easy cable management and exceptional cooling, with three included CORSAIR AirGuide RGB fans.",
-    "userId": 1
-  },
-  {
-    "id": 9,
-    "name": "Cooler",
-    "manufacturer": "Corsair",
-    "category": "iCUE H150i Elite Capellix",
-    "price": 150.0,
-    "description": "The CORSAIR iCUE H150i ELITE CAPELLIX Liquid CPU Cooler delivers powerful, low-noise cooling for your CPU, with a 360mm radiator, three CORSAIR ML120 RGB PWM fans, and an ultra-bright CAPELLIX RGB pump head.",
-    "userId": 1
-  },
-  {
-    "id": 10,
-    "name": "Monitor",
-    "manufacturer": "Asus",
-    "category": "ROG Swift PG259QN",
-    "price": 700.0,
-    "description": "ROG Swift 360Hz PG259QN is the perfect gaming monitor for esports and fast-paced action games. This FHD (1920 x 1080) display features a Fast IPS panel with up to a 360 Hz refresh rate, 1 ms gray-to-gray (GTG) response time and NVIDIA® G-SYNC® processor for silky-smooth gameplay and ultra-realistic visuals. And of course, it has that distinct ROG design that lets everyone know that this is no ordinary gaming monitor.",
-    "userId": 1
-  },
-  {
-    "id": 11,
-    "name": "Keyboard",
-    "manufacturer": "Corsair",
-    "category": "K100 RGB",
-    "price": 200.0,
-    "description": "The CORSAIR K100 RGB is the pinnacle of CORSAIR keyboards, offering the cutting-edge performance, style, durability, and customization that gamers need to stand above the rest.",
-    "userId": 1
-  },
-  {
-    "id": 12,
-    "name": "Mouse",
-    "manufacturer": "Corsair",
-    "category": "Dark Core RGB Pro",
-    "price": 100.0,
-    "description": "The CORSAIR DARK CORE RGB PRO helps you win without wires, boasting sub-1ms SLIPSTREAM WIRELESS, a custom 18,000 DPI optical sensor optimized for wireless mice, and hyper-polling technology up to 2,000Hz.",
-    "userId": 1
-  },
-  {
-    "id": 13,
-    "name": "Headset",
-    "manufacturer": "Corsair",
-    "category": "Virtuoso RGB Wireless",
-    "price": 200.0,
-    "description": "The CORSAIR Virtuoso RGB Wireless delivers a high-fidelity audio experience, all-day comfort from its premium memory foam earpads, and hyper-fast connectivity with SLIPSTREAM WIRELESS technology.",
-    "userId": 1
-  },
-  {
-    "id": 14,
-    "name": "Mousepad",
-    "manufacturer": "Corsair",
-    "category": "MM800 RGB Polaris",
-    "price": 50.0,
-    "description": "The MM800 RGB POLARIS builds on CORSAIR mouse pad durability, tracking, and precision with a whole new level of LED immersion. A low friction micro-texture surface combined with ample surface area (350mm x 260mm x 5mm) provides pixel-precise tracking no matter what gameplay. 15 individual RGB zones are powered by true PWM lighting, providing the most accurate color representation. Synchronize each of the lighting zones with other CORSAIR RGB products with CUE software to complete the ultimate gaming setup.",
-    "userId": 1
-  },
-  {
-    "id": 15,
-    "name": "Webcam",
-    "manufacturer": "Logitech",
-    "category": "C922 Pro Stream",
-    "price": 100.0,
-    "description": "Stream and record vibrant, true-to-life HD 1080p video at 30 frames per second or 720p at 60fps. Background replacement technology (powered by Personify) allows you to integrate your live image and any background scene, right onto your stream (only works with Windows 7 and above). Full HD glass lens and premium autofocus deliver razor-sharp, clear video in consistent high definition while two built-in mics capture your voice in rich stereo audio.",
-    "userId": 1
-  },
-  {
-    "id": 16,
-    "name": "Microphone",
-    "manufacturer": "Blue",
-    "category": "Yeti",
-    "price": 100.0,
-    "description": "Yeti is the most advanced and versatile multi-pattern USB microphone available anywhere. Combining three capsules and four different pattern settings, Yeti is the ultimate tool for creating amazing recordings, directly to your computer. With all new total blackout finish, Blackout Yeti adds style and energy to your recording or broadcasting setup. Blackout Yeti can capture anything with a clarity and ease unheard of in a USB microphone. Featuring Blue's innovative triple capsule array, Blackout Yeti can record in stereo or your choice of three other unique patterns, including cardioid, omnidirectional, and bidirectional. Blackout Yeti utilizes a high quality A-D converter, a built-in headphone amplifier for zero-latency monitoring, and direct controls for headphone volume, pattern selection, instant mute, and microphone gain. With no drivers to install, Blackout Yeti is the most versatile USB mic lighting up the airwaves today.",
-    "userId": 1
-  },
-  {
-    "id": 17,
-    "name": "Speakers",
-    "manufacturer": "Logitech",
-    "category": "Z906",
-    "price": 300.0,
-    "description": "Hear every detail, all around you - this THX-Certified system delivers theater-quality surround sound for your movies, games and music. Lots of watts You get big, bold sound and details galore from these 500-watt, THX-Certified speakers with 5.1 digital decoding. Plug it in No need to plug and unplug your components - you can connect up to six at once for easy access to all your audio. You run the show You've got total control over your audio experience with an easy-to-read-and-stack digital control console and a wireless remote.",
-    "userId": 1
-  },
-  {
-    "id": 18,
-    "name": "UPS",
-    "manufacturer": "APC",
-    "category": "Back-UPS Pro 1500",
-    "price": 300.0,
-    "description": "The Back-UPS Pro family offers guaranteed power protection for high performance computer systems, routers/modems, external storage devices, game consoles and other electronics in your home or business. These UPSs supply electronics with abundant battery backup during outages and stabilize unsafe voltage levels. They also provide power protection from damaging surges and spikes, and allow the use of management software so you get the most out of your UPS. Premium features of this family may include Automatic Voltage Regulation (AVR), an LCD display, Smart Outlets, energy saving functions that reduce electricity use, network manageability, Watchdog, or configurable outlets. Together with the rest of the Back-UPS Pro's standard features, they are the perfect choice to protect your data and keep your system available.",
-    "userId": 1
-  },
-  {
-    "id": 19,
-    "name": "Router",
-    "manufacturer": "Asus",
-    "category": "RT-AX86U",
-    "price": 300.0,
-    "description": "The battle-ready ROG Rapture GT-AC5300 router is designed with just one mission in mind: Make your gaming network awesome. It's packed with powerful gaming optimizations, and delivers dominating Wi-Fi performance, rock-solid stability and state-of-the-art security. The ROG-themed Gaming Center interface provides easy point-and-click control over every incredible feature. Game Dashboard provides a real-time heads-up about all of your devices and connections, while Game IPS (Intrusion Prevention System) and Game Boost are the command centers for frontline network security and high-performance game acceleration.",
-    "userId": 1
-  },
-  {
-    "id": 20,
-    "name": "Modem",
-    "manufacturer": "Motorola",
-    "category": "MB8600",
-    "price": 150.0,
-    "description": "The Motorola Model MB8600 cable modem supports ultra fast DOCSIS 3.1, the only cable modem standard that can deliver Internet speeds of 1Gbps or higher, up to many gigabits per second. Actual speeds depend on your cable modem service and the speed of your Ethernet LAN ports. MB8600 also has 32x8 support for the fastest possible speeds using the DOCSIS 3.0 standard. Even if you don't have DOCSIS 3.1 service now, you can benefit from the 32x8 DOCSIS 3.0 capability that's also built into this cable modem.",
-    "userId": 1
-  },
-  {
-    "id": 21,
-    "name": "Switch",
-    "manufacturer": "Netgear",
-    "category": "GS308T",
-    "price": 50.0,
-    "description": "The NETGEAR GS308T 8-Port Gigabit Smart Managed Pro Switch comes with 2 dedicated Gigabit SFP ports for fiber uplinks. Fanless, the GS308T is optimized for noise-sensitive environments. NETGEAR Smart Managed Pro Switches offer powerful Layer 2 features, great PoE functionality, and enhanced performance and usability. These switches are the ideal solution even for the most advanced small and medium organizations looking for the best combination of features, performance, and value: they are purposely designed for converged networks where voice, video, data are all carried on a single network platform. Optimized for network efficiency, operational cost savings, and ease of management, these switches are the ideal solution for the most advanced small and medium organizations.",
-    "userId": 1
-  },
-  {
-    "id": 22,
-    "name": "Access Point",
-    "manufacturer": "Ubiquiti",
-    "category": "UniFi AP AC Pro",
-    "price": 150.0,
-    "description": "The UniFi AC Pro AP features the latest Wi-Fi 802.11ac, 3x3 MIMO technology in a refined industrial design and is ideal for deployment of maximum‑performance wireless networks.",
-    "userId": 1
-  },
-  {
-    "id": 23,
-    "name": "Firewall",
-    "manufacturer": "Ubiquiti",
-    "category": "UniFi Dream Machine Pro",
-    "price": 400.0,
-    "description": "The UniFi Dream Machine Pro is an all-in-one network appliance for a scalable network in an office, retail, or hospitality environment. Powered by a fast 1.7 GHz quad-core processor, the UDM Pro combines multiple functions into a single device:",
-    "userId": 1
-  },
-  {
-    "id": 24,
-    "name": "Rack",
-    "manufacturer": "StarTech",
-    "category": "RK1236BKF",
-    "price": 200.0,
-    "description": "Store your servers, network and telecommunications equipment in this adjustable 36U open-frame rack. This 2-post adjustable depth open frame rack provides a durable, open air housing for rackmount servers and networking equipment. The equipment rack/cabinet features heavy gauge mounting rails to ensure a stable installation platform and adjustable posts for flexible installation.",
-    "userId": 1
-  },
-  {
-    "id": 25,
-    "name": "UPS",
-    "manufacturer": "APC",
-    "category": "Smart-UPS 1500VA",
-    "price": 300.0,
-    "description": "APC Smart-UPS protects your data by supplying reliable, network-grade power in either traditional Tower or Rack-optimized form factors for space constrained business critical applications. Award winning APC Smart-UPS is the perfect UPS for protecting business critical fileservers (Intel or UNIX based), minicomputers, network switches and hubs, Point of Sale, retail/bank back office and ATMs. With included PowerChute management software for servers and workstations, IT administrators can provide safe system shutdown and advanced UPS management (all major operating systems supported). Connect additional batteries to your UPS to provide extended runtime in the event of a power outage. With an APC Extended Battery Module (EBM) you can significantly increase runtime. Hot-swappable batteries ensure clean, uninterrupted power to protected equipment while batteries are being replaced.",
-    "userId": 1
-  },
-  {
-    "id": 26,
-    "name": "Router",
-    "manufacturer": "Asus",
-    "category": "RT-AX86U",
-    "price": 300.0,
-    "description": "The battle-ready ROG Rapture GT-AC5300 router is designed with just one mission in mind: Make your gaming network awesome. It's packed with powerful gaming optimizations, and delivers dominating Wi-Fi performance, rock-solid stability and state-of-the-art security. The ROG-themed Gaming Center interface provides easy point-and-click control over every incredible feature. Game Dashboard provides a real-time heads-up about all of your devices and connections, while Game IPS (Intrusion Prevention System) and Game Boost are the command centers for frontline network security and high-performance game acceleration.",
-    "userId": 1
-  },
-  {
-    "id": 27,
-    "name": "Modem",
-    "manufacturer": "Motorola",
-    "category": "MB8600",
-    "price": 150.0,
-    "description": "The Motorola Model MB8600 cable modem supports ultra fast DOCSIS 3.1, the only cable modem standard that can deliver Internet speeds of 1Gbps or higher, up to many gigabits per second. Actual speeds depend on your cable modem service and the speed of your Ethernet LAN ports. MB8600 also has 32x8 support for the fastest possible speeds using the DOCSIS 3.0 standard. Even if you don't have DOCSIS 3.1 service now, you can benefit from the 32x8 DOCSIS 3.0 capability that's also built into this cable modem.",
-    "userId": 1
-  },
-  {
-    "id": 28,
-    "name": "Switch",
-    "manufacturer": "Netgear",
-    "category": "GS308T",
-    "price": 50.0,
-    "description": "The NETGEAR GS308T 8-Port Gigabit Smart Managed Pro Switch comes with 2 dedicated Gigabit SFP ports for fiber uplinks. Fanless, the GS308T is optimized for noise-sensitive environments. NETGEAR Smart Managed Pro Switches offer powerful Layer 2 features, great PoE functionality, and enhanced performance and usability. These switches are the ideal solution even for the most advanced small and medium organizations looking for the best combination of features, performance, and value: they are purposely designed for converged networks where voice, video, data are all carried on a single network platform. Optimized for network efficiency, operational cost savings, and ease of management, these switches are the ideal solution for the most advanced small and medium organizations.",
-    "userId": 1
-  }
-]
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "CPU",
+      "description": "A central processing unit (CPU), also called a central processor, main processor or just processor, is the electronic circuitry within a computer that executes instructions that make up a computer program. The CPU performs basic arithmetic, logic, controlling, and input/output (I/O) operations specified by the instructions in the program. This contrasts with external components such as main memory and I/O circuitry, and specialized processors such as graphics processing units (GPUs)."
+    },
+    {
+      "id": 2,
+      "name": "GPU",
+      "description": "A graphics processing unit (GPU) is a specialized electronic circuit designed to rapidly manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display device. GPUs are used in embedded systems, mobile phones, personal computers, workstations, and game consoles. Modern GPUs are very efficient at manipulating computer graphics and image processing. Their highly parallel structure makes them more efficient than general-purpose central processing units (CPUs) for algorithms that process large blocks of data in parallel. In a personal computer, a GPU can be present on a video card or embedded on the motherboard. In certain CPUs, they are embedded on the CPU die."
+    },
+    {
+      "id": 3,
+      "name": "RAM",
+      "description": "Random-access memory (RAM) is a form of computer memory that can be read and changed in any order, typically used to store working data and machine code. A random-access memory device allows data items to be read or written in almost the same amount of time irrespective of the physical location of data inside the memory. In contrast, with other direct-access data storage media such as hard disks, CD-RWs, DVD-RWs and the older magnetic tapes and drum memory, the time required to read and write data items varies significantly depending on their physical locations on the recording medium, due to mechanical limitations such as media rotation speeds and arm movement."
+    },
+    {
+      "id": 4,
+      "name": "Motherboard",
+      "description": "A motherboard (also called mainboard, main circuit board, system board, baseboard, planar board, logic board, and mobo) is the main printed circuit board (PCB) in general-purpose computers and other expandable systems. It holds and allows communication between many of the crucial electronic components of a system, such as the central processing unit (CPU) and memory, and provides connectors for other peripherals. Unlike a backplane, a motherboard usually contains significant sub-systems, such as the central processor, the chipset's input/output and memory controllers, interface connectors, and other components integrated for general use."
+    },
+    {
+      "id": 5,
+      "name": "PSU",
+      "description": "A power supply unit (PSU) converts mains AC to low-voltage regulated DC power for the internal components of a computer. Modern personal computers universally use switched-mode power supplies. Some power supplies have a manual switch for selecting input voltage, while others automatically adapt to the mains voltage."
+    },
+    {
+      "id": 6,
+      "name": "SSD",
+      "description": "A solid-state drive (SSD) is a solid-state storage device that uses integrated circuit assemblies to store data persistently, typically using flash memory, and functioning as secondary storage in the hierarchy of computer storage. It is also sometimes called a solid-state device or a solid-state disk, even though SSDs lack the physical spinning disks and movable read–write heads used in hard disk drives (HDDs) and floppy disks."
+    },
+    {
+      "id": 7,
+      "name": "HDD",
+      "description": "A hard disk drive (HDD), hard disk, hard drive, or fixed disk is an electro-mechanical data storage device that stores and retrieves digital data using magnetic storage and one or more rigid rapidly rotating platters coated with magnetic material. The platters are paired with magnetic heads, usually arranged on a moving actuator arm, which read and write data to the platter surfaces. Data is accessed in a random-access manner, meaning that individual blocks of data can be stored and retrieved in any order. HDDs are a type of non-volatile storage, retaining stored data even when powered off."
+    },
+    {
+      "id": 8,
+      "name": "Case",
+      "description": "A computer case, also known as a computer chassis, tower, system unit, or cabinet, is the enclosure that contains most of the components of a personal computer (usually excluding the display, keyboard, and mouse). Cases are usually constructed from steel (often SECC—steel, electrogalvanized, cold-rolled, coil), aluminium and plastic. A computer case is sometimes incorrectly referred to metonymously as a CPU referring to a component housed within the case."
+    },
+    {
+      "id": 9,
+      "name": "Cooler",
+      "description": "A CPU cooler is a device designed to draw heat away from the system CPU and other components in the enclosure. Using a CPU cooler to lower CPU temperatures improves efficiency and stability of the system. Cooling devices for computers include heat sinks, fans and water cooling. The higher the performance of the CPU, the more heat it will generate. The CPU cooler must be capable of dissipating the heat generated by the processor. If the heat is not dissipated, the CPU may overheat and become unstable, causing system malfunctions."
+    },
+    {
+      "id": 10,
+      "name": "Monitor",
+      "description": "A computer monitor is an output device that displays information in pictorial form. A monitor usually comprises the visual display, circuitry, casing, and power supply. The display device in modern monitors is typically a thin film transistor liquid crystal display (TFT-LCD) with LED backlighting having replaced cold-cathode fluorescent lamp (CCFL) backlighting. Older monitors used a cathode ray tube (CRT). Monitors are connected to the computer via VGA, Digital Visual Interface (DVI), HDMI, DisplayPort, Thunderbolt, low-voltage differential signaling (LVDS) or other proprietary connectors and signals."
+    },
+    {
+      "id": 11,
+      "name": "Keyboard",
+      "description": "In computing, a keyboard is a typewriter-style device, which uses an arrangement of buttons or keys, to act as mechanical levers or electronic switches. Following the decline of punch cards and paper tape, interaction via teleprinter-style keyboards became the main input method for computers."
+    },
+    {
+      "id": 12,
+      "name": "Mouse",
+      "description": "A computer mouse (plural mice, rarely mouses) is a hand-held pointing device that detects two-dimensional motion relative to a surface. This motion is typically translated into the motion of a pointer on a display, which allows a smooth control of the graphical user interface of a computer."
+    },
+    {
+      "id": 13,
+      "name": "Headset",
+      "description": "A headset combines a headphone with a microphone. Headsets are made with either a single-earpiece (mono) or a double-earpiece (mono to both ears or stereo). Headsets provide the equivalent functionality of a telephone handset but with handsfree operation. They have many uses including in call centers and other telephone-intensive jobs and for anybody wishing to have both hands free during a telephone conversation."
+    },
+    {
+      "id": 14,
+      "name": "Mousepad",
+      "description": "A mousepad is a surface for placing and moving a computer mouse. A mousepad enhances the usability of the mouse compared to using a mouse directly on a table by providing a surface to allow it to measure movement accurately and without jitter. Some mousepads increase ergonomics by providing a padded wrist rest."
+    }
+  ],
+  "hardwareParts": [
+    {
+      "id": 1,
+      "name": "Intel Core i9-10900K",
+      "manufacturer": "Intel",
+      "categoryId": 1,
+      "price": 500.0,
+      "description": "Core processors are designed for what's next - the ultimate productivity, creativity, and gaming. 10th Gen Intel® Core™ processors with Intel® Iris® Plus graphics and Intel® UHD Graphics bring immersive, visually stunning experiences to laptops.",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "Nvidia GeForce RTX 3070",
+      "manufacturer": "Nvidia",
+      "categoryId": 2,
+      "price": 500.0,
+      "description": "The GeForce RTX™ 3070 is powered by Ampere—NVIDIA's 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.",
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "name": "Corsair Vengeance RGB Pro 32GB",
+      "manufacturer": "Corsair",
+      "categoryId": 3,
+      "price": 500.0,
+      "description": "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing dynamic multi-zone RGB lighting, while delivering the best in DDR4 performance.",
+      "userId": 1
+    },
+    {
+      "id": 4,
+      "name": "Asus ROG Strix Z490-E Gaming",
+      "manufacturer": "Asus",
+      "categoryId": 4,
+      "price": 500.0,
+      "description": "The ROG Strix Z490-E Gaming motherboard is designed to cope with the demands of 10th Generation Intel® Core™ processors, with boosted power delivery and an optimized cooling design providing more surface area for heat dissipation. ROG Strix Z490-E Gaming features AI enhancements and intuitive dashboards to help you overclock and tweak various parameters easily.",
+      "userId": 1
+    },
+    {
+      "id": 5,
+      "name": "Corsair Vengeance RGB Pro 32GB",
+      "manufacturer": "Corsair",
+      "categoryId": 5,
+      "price": 500.0,
+      "description": "The CORSAIR RM850x series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC, with virtually silent operation.",
+      "userId": 1
+    },
+    {
+      "id": 6,
+      "name": "Samsung 970 Evo Plus 1TB",
+      "manufacturer": "Samsung",
+      "categoryId": 6,
+      "price": 500.0,
+      "description": "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing.",
+      "userId": 1
+    },
+    {
+      "id": 7,
+      "name": "Seagate Barracuda 2TB",
+      "manufacturer": "Seagate",
+      "categoryId": 7,
+      "price": 500.0,
+      "description": "Versatile and dependable, Seagate’s fierce new BarraCuda drives are inspired by the past but ready for the future. BarraCuda drives are a cost-effective way to handle all your PC needs—working, playing storing your movies and music, and more.",
+      "userId": 1
+    },
+    {
+      "id": 8,
+      "name": "NZXT H510",
+      "manufacturer": "NZXT",
+      "categoryId": 8,
+      "price": 500.0,
+      "description": "The H510 compact mid-tower ATX cases looks stunning and is an excellent value, making it the ideal case when you want a small-footprint ATX case without sacrifice.",
+      "userId": 1
+    },
+    {
+      "id": 9,
+      "name": "Corsair H100i RGB Platinum",
+      "manufacturer": "Corsair",
+      "categoryId": 9,
+      "price": 500.0,
+      "description": "The CORSAIR Hydro Series H100i RGB PLATINUM is an all-in-one liquid CPU cooler with a 240mm radiator and vivid RGB lighting that’s built for extreme CPU cooling.",
+      "userId": 1
+    },
+    {
+      "id": 10,
+      "name": "Asus ROG Strix XG279Q",
+      "manufacturer": "Asus",
+      "categoryId": 10,
+      "price": 500.0,
+      "description": "ROG Strix XG279Q is a 27-inch QHD (2560 x 1440) HDR gaming monitor with an ultrafast 170Hz refresh rate (overclocking) and 1ms (MPRT) for super-smooth gaming visuals. G-SYNC Compatible ready, delivering a seamless, tear-free gaming experience by enabling VRR (variable refresh rate) by default.",
+      "userId": 1
+    },
+    {
+      "id": 11,
+      "name": "Corsair K95 RGB Platinum",
+      "manufacturer": "Corsair",
+      "categoryId": 11,
+      "price": 500.0,
+      "description": "The CORSAIR K95 RGB PLATINUM XT Mechanical Gaming Keyboard immerses your desktop in dynamic per-key RGB backlighting, equipped with a double-shot PBT keycap set and six dedicated macro keys with Elgato Stream Deck software integration.",
+      "userId": 1
+    },
+    {
+      "id": 12,
+      "name": "Logitech G502 Hero",
+      "manufacturer": "Logitech",
+      "categoryId": 12,
+      "price": 500.0,
+      "description": "G502 HERO features an advanced optical sensor for maximum tracking accuracy, customizable RGB lighting, custom game profiles, from 200 up to 16,000 DPI, and repositionable weights.",
+      "userId": 1
+    },
+    {
+      "id": 13,
+      "name": "HyperX Cloud Alpha",
+      "manufacturer": "HyperX",
+      "categoryId": 13,
+      "price": 500.0,
+      "description": "HyperX Cloud Alpha’s groundbreaking Dual Chamber Drivers design will give your audio more distinction and clarity by reducing the distortion. The dual chambers separate the bass from the mids and highs, allowing optimal tuning for cleaner, smoother sound. The Cloud Alpha headset builds upon HyperX’s foundation of signature award-winning comfort with premium red memory foam, expanded headband and softer, more pliable leatherette. The durable aluminum frame can take the rigors of daily play, and per player request, Cloud Alpha also features a tough, detachable braided cable. The detachable noise-cancellation microphone is certified by Discord and TeamSpeak™, ensuring you’ll have great team communication. It’s multi-platform compatible with in-line audio controls, so serious gamers on PC, PS4™, Xbox One™ and other platforms with a 3.5mm port will benefit from the bold sound of the Cloud Alpha evolution.",
+      "userId": 1
+    },
+    {
+      "id": 14,
+      "name": "Corsair MM800 RGB Polaris",
+      "manufacturer": "Corsair",
+      "categoryId": 14,
+      "price": 500.0,
+      "description": "The MM800 RGB POLARIS builds on CORSAIR mouse pad durability, tracking, and precision with a whole new level of LED immersion. A low friction micro-texture surface combined with ample surface area (350mm x 260mm x 5mm) provides pixel-precise tracking no matter what gameplay. 15 individual RGB zones are powered by true PWM lighting, providing the most accurate color representation. Synchronize each of the lighting zones with other CORSAIR RGB products with CUE software to complete the ultimate gaming setup.",
+      "userId": 1
+    },
+    {
+      "id": 15,
+      "name": "Intel Core i9-10900K",
+      "manufacturer": "Intel",
+      "categoryId": 1,
+      "price": 500.0,
+      "description": "Core processors are designed for what's next - the ultimate productivity, creativity, and gaming. 10th Gen Intel® Core™ processors with Intel® Iris® Plus graphics and Intel® UHD Graphics bring immersive, visually stunning experiences to laptops.",
+      "userId": 2
+    },
+    {
+      "id": 16,
+      "name": "Nvidia GeForce RTX 3070",
+      "manufacturer": "Nvidia",
+      "categoryId": 2,
+      "price": 500.0,
+      "description": "The GeForce RTX™ 3070 is powered by Ampere—NVIDIA's 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.",
+      "userId": 2
+    },
+    {
+      "id": 17,
+      "name": "Corsair Vengeance RGB Pro 32GB",
+      "manufacturer": "Corsair",
+      "categoryId": 3,
+      "price": 500.0,
+      "description": "CORSAIR VENGEANCE RGB PRO Series DDR4 overclocked memory lights up your PC with mesmerizing dynamic multi-zone RGB lighting, while delivering the best in DDR4 performance.",
+      "userId": 2
+    },
+    {
+      "id": 18,
+      "name": "Asus ROG Strix Z490-E Gaming",
+      "manufacturer": "Asus",
+      "categoryId": 4,
+      "price": 500.0,
+      "description": "The ROG Strix Z490-E Gaming motherboard is designed to cope with the demands of 10th Generation Intel® Core™ processors, with boosted power delivery and an optimized cooling design providing more surface area for heat dissipation. ROG Strix Z490-E Gaming features AI enhancements and intuitive dashboards to help you overclock and tweak various parameters easily.",
+      "userId": 2
+    },
+    {
+      "id": 19,
+      "name": "Corsair Vengeance RGB Pro 32GB",
+      "manufacturer": "Corsair",
+      "categoryId": 5,
+      "price": 500.0,
+      "description": "The CORSAIR RM850x series fully modular power supplies are built with the highest quality components to deliver 80 PLUS Gold efficient power to your PC, with virtually silent operation.",
+      "userId": 2
+    },
+    {
+      "id": 20,
+      "name": "Samsung 970 Evo Plus 1TB",
+      "manufacturer": "Samsung",
+      "categoryId": 6,
+      "price": 500.0,
+      "description": "The ultimate in performance, upgraded. Faster than the 970 EVO, the 970 EVO Plus is powered by the latest V-NAND technology and firmware optimization. It maximizes the potential of NVMe bandwidth for unbeatable computing.",
+      "userId": 2
+    },
+    {
+      "id": 21,
+      "name": "Seagate Barracuda 2TB",
+      "manufacturer": "Seagate",
+      "categoryId": 7,
+      "price": 500.0,
+      "description": "Versatile and dependable, Seagate’s fierce new BarraCuda drives are inspired by the past but ready for the future. BarraCuda drives are a cost-effective way to handle all your PC needs—working, playing storing your movies and music, and more.",
+      "userId": 2
+    },
+    {
+      "id": 22,
+      "name": "NZXT H510",
+      "manufacturer": "NZXT",
+      "categoryId": 8,
+      "price": 500.0,
+      "description": "The H510 compact mid-tower ATX cases looks stunning and is an excellent value, making it the ideal case when you want a small-footprint ATX case without sacrifice.",
+      "userId": 2
+    },
+    {
+      "id": 23,
+      "name": "Corsair H100i RGB Platinum",
+      "manufacturer": "Corsair",
+      "categoryId": 9,
+      "price": 500.0,
+      "description": "The CORSAIR Hydro Series H100i RGB PLATINUM is an all-in-one liquid CPU cooler with a 240mm radiator and vivid RGB lighting that’s built for extreme CPU cooling.",
+      "userId": 2
+    },
+    {
+      "id": 24,
+      "name": "Asus ROG Strix XG279Q",
+      "manufacturer": "Asus",
+      "categoryId": 10,
+      "price": 500.0,
+      "description": "ROG Strix XG279Q is a 27-inch QHD (2560 x 1440) HDR gaming monitor with an ultrafast 170Hz refresh rate (overclocking) and 1ms (MPRT) for super-smooth gaming visuals. G-SYNC Compatible ready, delivering a seamless, tear-free gaming experience by enabling VRR (variable refresh rate) by default.",
+      "userId": 2
+    },
+    {
+      "id": 25,
+      "name": "Corsair K95 RGB Platinum",
+      "manufacturer": "Corsair",
+      "categoryId": 11,
+      "price": 500.0,
+      "description": "The CORSAIR K95 RGB PLATINUM XT Mechanical Gaming Keyboard immerses your desktop in dynamic per-key RGB backlighting, equipped with a double-shot PBT keycap set and six dedicated macro keys with Elgato Stream Deck software integration.",
+      "userId": 2
+    },
+    {
+      "id": 26,
+      "name": "Logitech G502 Hero",
+      "manufacturer": "Logitech",
+      "categoryId": 12,
+      "price": 500.0,
+      "description": "G502 HERO features an advanced optical sensor for maximum tracking accuracy, customizable RGB lighting, custom game profiles, from 200 up to 16,000 DPI, and repositionable weights.",
+      "userId": 2
+    },
+    {
+      "id": 27,
+      "name": "HyperX Cloud Alpha",
+      "manufacturer": "HyperX",
+      "categoryId": 13,
+      "price": 500.0,
+      "description": "HyperX Cloud Alpha’s groundbreaking Dual Chamber Drivers design will give your audio more distinction and clarity by reducing the distortion. The dual chambers separate the bass from the mids and highs, allowing optimal tuning for cleaner, smoother sound. The Cloud Alpha headset builds upon HyperX’s foundation of signature award-winning comfort with premium red memory foam, expanded headband and softer, more pliable leatherette. The durable aluminum frame can take the rigors of daily play, and per player request, Cloud Alpha also features a tough, detachable braided cable. The detachable noise-cancellation microphone is certified by Discord and TeamSpeak™, ensuring you’ll have great team communication. It’s multi-platform compatible with in-line audio controls, so serious gamers on PC, PS4™, Xbox One™ and other platforms with a 3.5mm port will benefit from the bold sound of the Cloud Alpha evolution.",
+      "userId": 2
+    },
+    {
+      "id": 28,
+      "name": "Corsair MM800 RGB Polaris",
+      "manufacturer": "Corsair",
+      "categoryId": 14,
+      "price": 500.0,
+      "description": "The MM800 RGB POLARIS builds on CORSAIR mouse pad durability, tracking, and precision with a whole new level of LED immersion. A low friction micro-texture surface combined with ample surface area (350mm x 260mm x 5mm) provides pixel-precise tracking no matter what gameplay. 15 individual RGB zones are powered by true PWM lighting, providing the most accurate color representation. Synchronize each of the lighting zones with other CORSAIR RGB products with CUE software to complete the ultimate gaming setup.",
+      "userId": 2
+    }
+  ]
+}

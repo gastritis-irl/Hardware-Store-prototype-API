@@ -6,6 +6,7 @@ import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartPageDTO;
 import edu.bbte.idde.bfim2114.springbackend.mapper.HardwarePartMapper;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.service.HardwareService;
+import edu.bbte.idde.bfim2114.springbackend.util.SpecificationFields;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,8 @@ public class HardwareController {
         @RequestParam("MinPrice") Optional<Double> minPrice,
         @RequestParam("MaxPrice") Optional<Double> maxPrice,
         @RequestParam("TextSearch") Optional<String> textSearch,
-        @RequestParam("userId") Optional<Long> userId
+        @RequestParam("userId") Optional<Long> userId,
+        @RequestParam("categoryName") Optional<String> categoryName
     ) {
         // log the params
         log.info("GET: /api/hardware");
@@ -52,18 +54,22 @@ public class HardwareController {
         log.info("MaxPrice: {}", maxPrice.orElse(null));
         log.info("TextSearch: {}", textSearch.orElse(null));
         log.info("userId: {}", userId.orElse(null));
+        log.info("categoryName: {}", categoryName.orElse(null));
 
         Specification<HardwarePart> spec = Specification.where(null);
+        SpecificationFields specificationFields = new SpecificationFields();
+        specificationFields.setPage(pageNumber.orElse(1));
+        specificationFields.setSortBy(orderBy.orElse(null));
+        specificationFields.setDirection(direction.orElse(null));
+        specificationFields.setMinPrice(minPrice.orElse(0.0));
+        specificationFields.setMaxPrice(maxPrice.orElse(null));
+        specificationFields.setTextSearch(textSearch.orElse(null));
+        specificationFields.setUserId(userId.orElse(null));
+        specificationFields.setCategoryName(categoryName.orElse(null));
+        specificationFields.setSpec(spec);
         return ResponseEntity.ok(
             hardwareService.findAllWithFilters(
-                pageNumber.orElse(1),
-                spec,
-                orderBy.orElse(null),
-                direction.orElse(null),
-                minPrice.orElse(0.0),
-                maxPrice.orElse(null),
-                textSearch.orElse(null),
-                userId.orElse(null)
+                specificationFields
             ));
     }
 

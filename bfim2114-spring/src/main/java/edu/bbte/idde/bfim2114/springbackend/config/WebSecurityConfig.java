@@ -1,8 +1,8 @@
 package edu.bbte.idde.bfim2114.springbackend.config;
 
+import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import edu.bbte.idde.bfim2114.springbackend.util.JwtRequestFilter;
-import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +37,8 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers(HttpMethod.GET,
                     "/api/user/**",
-                    "/api/hardware/**"
+                    "/api/hardware/**",
+                    "/api/category/**"
                 ).permitAll()
                 .requestMatchers(
                     "/api/login/**",

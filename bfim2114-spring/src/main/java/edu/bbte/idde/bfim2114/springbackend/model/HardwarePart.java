@@ -19,9 +19,6 @@ public class HardwarePart extends BaseEntity {
     @Column(name = "manufacturer", length = 50)
     private String manufacturer;
 
-    @Column(name = "category", length = 50)
-    private String category;
-
     @Column(name = "price")
     private Double price;
 
@@ -33,4 +30,9 @@ public class HardwarePart extends BaseEntity {
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "category_id")
+    @ToString.Exclude
+    private Category category;
 }

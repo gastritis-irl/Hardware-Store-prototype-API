@@ -13,7 +13,7 @@ public class HardwarePartInDTO {
 
     private String manufacturer;
 
-    private String category;
+    private String categoryName;
 
     @Min(value = 0, message = "Price must be greater or equal than 0")
     private Double price;

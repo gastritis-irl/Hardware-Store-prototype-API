@@ -4,6 +4,7 @@ import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartInDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartOutDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartPageDTO;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
+import edu.bbte.idde.bfim2114.springbackend.service.CategoryService;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.AfterMapping;
@@ -21,6 +22,10 @@ public abstract class HardwarePartMapper {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Mapping(source = "category.name", target = "categoryName")
     @Mapping(source = "user.id", target = "userId")
     public abstract HardwarePartOutDTO hardwarePartToDTO(HardwarePart part);
 
@@ -28,7 +33,6 @@ public abstract class HardwarePartMapper {
 
     public abstract HardwarePartPageDTO hardwarePartPageToDTO(Collection<HardwarePart> hardwareParts,
                                                               int nrOfPages, long nrOfElements);
-
 
     @AfterMapping
     protected void handleDtoToEntityMapping(HardwarePartInDTO dto, @MappingTarget HardwarePart entity) {
@@ -38,6 +42,11 @@ public abstract class HardwarePartMapper {
             log.info("{}", userService.findById(dto.getUserId()));
             entity.setUser(userService.findById(dto.getUserId()));
             log.info("{}", entity.getUser());
+        }
+        if (dto.getCategoryName() == null) {
+            entity.setCategory(null);
+        } else {
+            entity.setCategory(categoryService.findByName(dto.getCategoryName()));
         }
     }
 }

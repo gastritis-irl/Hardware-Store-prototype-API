@@ -1,10 +1,10 @@
 package edu.bbte.idde.bfim2114.springbackend.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartOutDTO;
+import edu.bbte.idde.bfim2114.springbackend.model.Category;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.model.User;
+import edu.bbte.idde.bfim2114.springbackend.service.CategoryService;
 import edu.bbte.idde.bfim2114.springbackend.service.HardwareService;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import jakarta.annotation.PostConstruct;
@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Profile("data-gen")
@@ -28,12 +29,8 @@ import java.util.List;
 public class DataGen {
 
     private final UserService userService;
-
-    private final HardwareService hardwarePartService;
-
-    private static class HardwarePartOutDTOTypeRef extends TypeReference<List<HardwarePartOutDTO>> {
-    }
-
+    private final HardwareService hardwareService;
+    private final CategoryService categoryService;
 
     @PostConstruct
     public void generateData() throws IOException {
@@ -54,17 +51,31 @@ public class DataGen {
         ObjectMapper mapper = new ObjectMapper();
         Resource resource = new ClassPathResource("DataGen.json");
         File jsonFile = resource.getFile();
-        List<HardwarePartOutDTO> hardwareParts = mapper.readValue(jsonFile, new HardwarePartOutDTOTypeRef());
+        Map data = mapper.readValue(jsonFile, Map.class);
 
-        for (HardwarePartOutDTO part : hardwareParts) {
+        List<Map<String, Object>> categories = (List<Map<String, Object>>) data.get("categories");
+        for (Map<String, Object> categoryData : categories) {
+            Category category = new Category();
+            category.setName((String) categoryData.get("name"));
+            category.setDescription((String) categoryData.get("description"));
+            categoryService.save(category);
+        }
+
+        List<Map<String, Object>> hardwareParts = (List<Map<String, Object>>) data.get("hardwareParts");
+        for (Map<String, Object> partData : hardwareParts) {
+            Category category = categoryService.findById(((Number) partData.get("categoryId")).longValue());
             HardwarePart hardwarePart = new HardwarePart(
-                part.getName(), part.getManufacturer(), part.getCategory(),
-                part.getPrice(), part.getDescription(), userService.findById(part.getUserId())
+                (String) partData.get("name"),
+                (String) partData.get("manufacturer"),
+                ((Number) partData.get("price")).doubleValue(),
+                (String) partData.get("description"),
+                userService.findById(((Number) partData.get("userId")).longValue()),
+                category
             );
-            hardwarePartService.create(hardwarePart);
+            log.warn("JSON HardwarePart Category: {}", hardwarePart.getCategory());
+            hardwareService.create(hardwarePart);
         }
 
         log.info("Generated hardware parts from JSON");
     }
-
 }

@@ -4,6 +4,7 @@ import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartPageDTO;
 import edu.bbte.idde.bfim2114.springbackend.mapper.HardwarePartMapper;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.repository.HardwareRepository;
+import edu.bbte.idde.bfim2114.springbackend.util.SpecificationFields;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Slf4j
@@ -56,17 +58,13 @@ public class HardwareServiceImpl implements HardwareService {
         return hardwareRepository.save(part);
     }
 
-    private void removeHardwarePartFromUser(HardwarePart part) {
-        userService.removeHardwarePart(part.getUser(), part);
-    }
-
     @Transactional
     @Override
     public void delete(Long partId) {
 
         log.info("Deleting HardwarePart by id: {}", partId);
         Optional<HardwarePart> part = hardwareRepository.findById(partId);
-        part.ifPresent(this::removeHardwarePartFromUser);
+        part.ifPresent(hardwarePart -> userService.removeHardwarePart(hardwarePart.getUser(), hardwarePart));
         hardwareRepository.deleteById(partId);
     }
 
@@ -90,22 +88,28 @@ public class HardwareServiceImpl implements HardwareService {
     }
 
     @Override
-    public HardwarePartPageDTO findAllWithFilters(int page, Specification<HardwarePart> spec, String sortBy,
-                                                  String direction, Double minPrice, Double maxPrice,
-                                                  String textSearch, Long userId) {
+    public HardwarePartPageDTO findAllWithFilters(SpecificationFields fields) {
+        Specification<HardwarePart> specification = fields.getSpec();
+        specification = applyUserFilter(fields.getUserId(), specification);
+        specification = applyTextSearchFilter(fields.getTextSearch(), specification);
+        specification = applyPriceFilter(fields.getMinPrice(), fields.getMaxPrice(), specification);
+        specification = applyCategoryFilter(fields.getCategoryName(), specification);
 
-        Specification<HardwarePart> specification = spec;
-        specification = applyUserFilter(userId, specification);
-        specification = applyTextSearchFilter(textSearch, specification);
-        specification = applyPriceFilter(minPrice, maxPrice, specification);
-
-        Pageable pageable = createPageable(page, sortBy, direction);
+        Pageable pageable = createPageable(fields.getPage(), fields.getSortBy(), fields.getDirection());
         Page<HardwarePart> hardwarePartPage = hardwareRepository.findAll(specification, pageable);
 
         return hardwarePartMapper.hardwarePartPageToDTO(
             hardwarePartPage.getContent(),
             hardwarePartPage.getTotalPages(),
             hardwarePartPage.getNumberOfElements());
+    }
+
+    private Specification<HardwarePart> applyCategoryFilter(String categoryName,
+                                                            Specification<HardwarePart> spec) {
+        if (categoryName != null) {
+            return filterByCategoryName(categoryName, spec);
+        }
+        return spec;
     }
 
     private Specification<HardwarePart> applyUserFilter(Long userId, Specification<HardwarePart> spec) {
@@ -139,6 +143,15 @@ public class HardwareServiceImpl implements HardwareService {
         return PageRequest.of(Math.max(page - 1, 0), PAGE_SIZE, sort);
     }
 
+    private Specification<HardwarePart> filterByCategoryName(String categoryName,
+                                                             Specification<HardwarePart> specification) {
+        Specification<HardwarePart> spec = specification;
+        if (categoryName != null) {
+            spec = spec.and((root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("category").get("name"), categoryName));
+        }
+        return spec;
+    }
 
     private Specification<HardwarePart> filterByPrice(Double minPrice, Double maxPrice,
                                                       Specification<HardwarePart> specification) {
@@ -160,15 +173,17 @@ public class HardwareServiceImpl implements HardwareService {
                                                                         Specification<HardwarePart> specification) {
         Specification<HardwarePart> spec = specification;
         if (textSearch != null) {
+            String textSearchLower = "%" + textSearch.toLowerCase(Locale.US) + "%";
             spec = spec.and((root, query, criteriaBuilder) ->
                 criteriaBuilder.or(
-                    criteriaBuilder.like(root.get("name"), "%" + textSearch + "%"),
-                    criteriaBuilder.like(root.get("description"), "%" + textSearch + "%")
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), textSearchLower),
+                    criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), textSearchLower)
                 )
             );
         }
         return spec;
     }
+
 
     private Specification<HardwarePart> filterByUserId(Long userId, Specification<HardwarePart> specification) {
         Specification<HardwarePart> spec = specification;
