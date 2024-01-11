@@ -1,14 +1,22 @@
 package edu.bbte.idde.bfim2114.springbackend.controller;
 
 
+import edu.bbte.idde.bfim2114.springbackend.dto.CategoryPageDTO;
+import edu.bbte.idde.bfim2114.springbackend.mapper.CategoryMapper;
 import edu.bbte.idde.bfim2114.springbackend.model.Category;
 import edu.bbte.idde.bfim2114.springbackend.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -17,6 +25,8 @@ import org.springframework.web.server.ResponseStatusException;
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    private final CategoryMapper categoryMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id) {
@@ -29,11 +39,25 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Category>> findAll() {
+    public ResponseEntity<CategoryPageDTO> getAllCategoriesWithPagination(
+        @RequestParam("pageNumber") Optional<Integer> pageNumber,
+        @RequestParam("pageSize") Optional<Integer> pageSize,
+        @RequestParam("sortBy") Optional<String> sortBy,
+        @RequestParam("direction") Optional<String> direction
+    ) {
         log.info("GET: /api/category");
-        Iterable<Category> categories = categoryService.findAll();
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+        int page = pageNumber.orElse(1) - 1;
+        int size = pageSize.orElse(12);
+        String sort = sortBy.orElse("id");
+        Sort.Direction dir = direction.orElse("ASC").equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC; // Default direction
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(dir, sort));
+        Page<Category> categories = categoryService.findAllWithPagination(pageable);
+        CategoryPageDTO categoryPageDTO = categoryMapper.toCategoryPageDTO(categories.getContent(), categories.getTotalPages(), categories.getTotalElements());
+
+        return new ResponseEntity<>(categoryPageDTO, HttpStatus.OK);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {

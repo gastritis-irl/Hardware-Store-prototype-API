@@ -6,6 +6,8 @@ import edu.bbte.idde.bfim2114.springbackend.repository.CategoryRepository;
 import edu.bbte.idde.bfim2114.springbackend.repository.HardwareRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -51,5 +53,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
+    }
+
+    @Override
+    public Page<Category> findAllWithPagination(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 }
