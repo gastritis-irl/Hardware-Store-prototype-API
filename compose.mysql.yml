@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  jdbc-mysql:
+  idde-mysql:
     image: mysql:8.1.0
     restart: unless-stopped
     environment:
@@ -11,3 +11,16 @@ services:
       MYSQL_PASSWORD: 1234
     ports:
       - "3307:3306"
+
+  idde-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=data-gen, dev
+      - SERVER_PORT=8081
+    depends_on:
+      - idde-mysql
+    ports:
+      - "8081:8081"
