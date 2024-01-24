@@ -1,0 +1,16 @@
+services:
+    idde-backend:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        restart: unless-stopped
+        environment:
+        - SPRING_PROFILES_ACTIVE=data-gen, dev
+        - SERVER_PORT=8081
+        - SPRING_DATASOURCE_URL=jdbc:h2:mem:test
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+        - SPRING_JPA_SHOW_SQL=true
+        - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+        - SPRING_JPA_OPEN_IN_VIEW=true
+        ports:
+        - "8081:8081"

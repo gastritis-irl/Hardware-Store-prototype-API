@@ -18,8 +18,15 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      - SPRING_PROFILES_ACTIVE=data-gen, dev
+      - SPRING_PROFILES_ACTIVE=data-gen, prod
       - SERVER_PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3307/jdbcdb?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=jdbcuser
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - SPRING_JPA_OPEN_IN_VIEW=true
     depends_on:
       - idde-mysql
     ports:
