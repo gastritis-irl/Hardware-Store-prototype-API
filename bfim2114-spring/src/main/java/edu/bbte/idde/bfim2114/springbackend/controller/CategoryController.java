@@ -49,11 +49,12 @@ public class CategoryController {
         int page = pageNumber.orElse(1) - 1;
         int size = pageSize.orElse(12);
         String sort = sortBy.orElse("id");
-        Sort.Direction dir = direction.orElse("ASC").equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort.Direction dir = "ASC".equalsIgnoreCase(direction.orElse("ASC")) ? Sort.Direction.ASC : Sort.Direction.DESC;
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(dir, sort));
         Page<Category> categories = categoryService.findAllWithPagination(pageable);
-        CategoryPageDTO categoryPageDTO = categoryMapper.toCategoryPageDTO(categories.getContent(), categories.getTotalPages(), categories.getTotalElements());
+        CategoryPageDTO categoryPageDTO = categoryMapper.toCategoryPageDTO(categories.getContent(),
+            categories.getTotalPages(), categories.getTotalElements());
 
         return new ResponseEntity<>(categoryPageDTO, HttpStatus.OK);
     }
