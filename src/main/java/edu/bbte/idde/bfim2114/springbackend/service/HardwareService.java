@@ -11,8 +11,6 @@ public interface HardwareService {
 
     boolean isValid(HardwarePart part);
 
-    void clearUnassociatedParts();
-
     Optional<HardwarePart> findById(Long partId);
 
     HardwarePart create(HardwarePart part);

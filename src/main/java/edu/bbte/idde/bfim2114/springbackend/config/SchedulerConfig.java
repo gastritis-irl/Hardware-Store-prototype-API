@@ -16,23 +16,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class SchedulerConfig {
 
-    private final HardwareService hardwarePartService;
-    private final DatabaseBackupService databaseBackupService;
-
-    @Scheduled(fixedRate = 30000)
-    public void backupDatabase() {
-        try {
-            databaseBackupService.backupDatabase();
-        } catch (IOException|InterruptedException e) {
-            log.error("Error while backing up database", e);
-        }
-    }
-
     @Scheduled(cron = "0 0 * * * *")
     public void clearUnassociatedParts() {
         log.info("Clearing unassociated parts");
-        hardwarePartService.clearUnassociatedParts();
     }
+
     @Scheduled(fixedRate = 10000)
     public void scheduleTaskWithFixedRate() {
         log.info("Fixed Rate Task :: Execution Time - {}", System.currentTimeMillis());

@@ -84,12 +84,6 @@ public class HardwareServiceImpl implements HardwareService {
         log.info("Updating HardwarePart: {}", part);
         return hardwareRepository.save(part);
     }
-    @Transactional
-    @Override
-    public void clearUnassociatedParts() {
-        List<HardwarePart> unassociatedParts = hardwareRepository.findUnassociatedParts();
-        hardwareRepository.deleteAll(unassociatedParts);
-    }
 
     @Override
     public List<HardwarePart> findAll() {
