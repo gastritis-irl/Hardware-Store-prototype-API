@@ -1,26 +1,26 @@
 services:
-#    redis for cahing
-    idde-redis:
-        image: redis:latest
-        ports:
-        - "6379:6379"
-    idde-backend:
-        build:
-          context: .
-          dockerfile: Dockerfile
-        restart: unless-stopped
-        environment:
-        - SPRING_PROFILES_ACTIVE=data-gen,dev
-        - SERVER_PORT=8081
-        - SPRING_DATASOURCE_URL=jdbc:h2:mem:test
-        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-        - SPRING_JPA_SHOW_SQL=true
-        - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
-        - SPRING_JPA_OPEN_IN_VIEW=true
-        - SPRING_CACHE_TYPE=redis
-        - SPRING_REDIS_HOST=idde-redis
-        - SPRING_REDIS_PORT=6379
-        ports:
-        - "8081:8081"
-        depends_on:
-            -   idde-redis
+  #    redis for cahing
+  idde-redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  idde-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:test
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - SPRING_JPA_OPEN_IN_VIEW=true
+      - SPRING_CACHE_TYPE=redis
+      - SPRING_REDIS_HOST=idde-redis
+      - SPRING_REDIS_PORT=6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - idde-redis

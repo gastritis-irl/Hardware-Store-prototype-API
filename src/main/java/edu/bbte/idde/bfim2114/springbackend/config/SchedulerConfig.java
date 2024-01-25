@@ -1,14 +1,10 @@
 package edu.bbte.idde.bfim2114.springbackend.config;
 
-import edu.bbte.idde.bfim2114.springbackend.service.DatabaseBackupService;
-import edu.bbte.idde.bfim2114.springbackend.service.HardwareService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
-
-import java.io.IOException;
 
 @Configuration
 @Slf4j

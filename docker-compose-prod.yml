@@ -1,6 +1,10 @@
 version: "3.8"
 
 services:
+  idde-redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
   idde-mysql:
     image: mysql:8.1.0
     restart: unless-stopped
@@ -18,7 +22,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
-      - SPRING_PROFILES_ACTIVE=data-gen, prod
+      - SPRING_PROFILES_ACTIVE=prod
       - SERVER_PORT=8081
       - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3307/jdbcdb?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=jdbcuser

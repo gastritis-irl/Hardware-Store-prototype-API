@@ -23,8 +23,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-    runtimeOnly group: 'com.mysql', name: 'mysql-connector-j', version: '8.1.0'
-
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
@@ -33,8 +31,6 @@ dependencies {
 
     implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
     implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '6.2.0'
-
-    runtimeOnly group: 'com.h2database', name: 'h2', version: '2.2.224'
 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.9'
     runtimeOnly group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.11'
@@ -45,4 +41,10 @@ dependencies {
 test {
     useJUnitPlatform()
 }
- apply from :"$rootDir/lint.gradle"
+apply from: "$rootDir/lint.gradle"
+
+def profile = properties.profile ?: 'dev'
+logger.quiet "Detected profile: ${profile}"
+
+// profil-specifikus beállításokat betöltünk a specifikus gradle állományból
+apply from: "build-${profile}.gradle"
