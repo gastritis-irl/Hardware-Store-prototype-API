@@ -23,7 +23,7 @@ public class SchedulerConfig {
     public void backupDatabase() {
         try {
             databaseBackupService.backupDatabase();
-        } catch (IOException e) {
+        } catch (IOException|InterruptedException e) {
             log.error("Error while backing up database", e);
         }
     }

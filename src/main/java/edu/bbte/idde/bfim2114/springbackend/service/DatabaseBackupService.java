@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,12 +25,26 @@ public class DatabaseBackupService {
     @Value("${spring.datasource.database}")
     private String database;
 
-    public void backupDatabase() throws IOException {
+    public void backupDatabase() throws IOException,InterruptedException {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         String backupFile = String.format("%s/backup_%s.sql", BACKUP_DIR, timestamp);
-        String command = String.format(BACKUP_COMMAND, username, password, database, backupFile);
+        String escapedPassword = password.replace("$", "\\$"); // Escape special characters, such as $
+        String command = String.format(BACKUP_COMMAND, username, escapedPassword, database, backupFile);
 
         ProcessBuilder processBuilder = new ProcessBuilder("/bin/sh", "-c", command);
-        processBuilder.start();
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+
+        // It's a good practice to read the output of the process
+        try (InputStream inputStream = process.getInputStream()) {
+            String output = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            System.out.println(output); // or log it
+        }
+
+        // Wait for the process to finish
+        int exitCode = process.waitFor();
+        if (exitCode != 0) {
+            throw new IOException("Backup process exited with error code: " + exitCode);
+        }
     }
 }

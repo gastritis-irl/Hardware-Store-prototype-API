@@ -11,8 +11,8 @@ FROM openjdk:18.0.1-jdk-slim
 
 WORKDIR /idde
 
-COPY --from=build /usr/src/app/build/libs/bfim2114.jar app.jar
+COPY --from=build /usr/src/app/build/libs/*.war app.war
 
 EXPOSE 8081
 
-CMD ["java", "-jar", "app.jarr"]
+CMD ["java", "-jar", "app.war"]
