@@ -7,12 +7,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "categories")
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class Category extends BaseEntity {
+public class Category extends BaseEntity implements Serializable {
 
     @Column(name = "name", nullable = false, length = 50, unique = true)
     private String name;

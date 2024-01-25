@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
 
     @Column(unique = true, name = "email", nullable = false, length = 50)
     private String email;

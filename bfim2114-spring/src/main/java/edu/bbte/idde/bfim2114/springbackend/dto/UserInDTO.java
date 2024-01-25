@@ -4,8 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class UserInDTO {
+public class UserInDTO implements Serializable {
 
     @NotBlank(message = "Email cannot be blank")
     private String email;

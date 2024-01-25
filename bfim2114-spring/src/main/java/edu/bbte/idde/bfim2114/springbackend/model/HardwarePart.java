@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -11,7 +13,7 @@ import lombok.*;
 @Table(name = "hardware_parts")
 @AllArgsConstructor
 @NoArgsConstructor
-public class HardwarePart extends BaseEntity {
+public class HardwarePart extends BaseEntity implements Serializable {
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;

@@ -19,7 +19,7 @@ public class RateLimitingInterceptor implements HandlerInterceptor {
     private final RateLimiterHolder rateLimiterHolder;
 
     public RateLimitingInterceptor() {
-        this.rateLimiterHolder = new RateLimiterHolder(30);
+        this.rateLimiterHolder = new RateLimiterHolder(100);
         log.info("RateLimitingInterceptor created");
     }
 
