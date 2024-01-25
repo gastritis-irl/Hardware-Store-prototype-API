@@ -19,12 +19,12 @@ public class SchedulerConfig {
     private final HardwareService hardwarePartService;
     private final DatabaseBackupService databaseBackupService;
 
-    @Scheduled(cron = "0 0 * * *")
+    @Scheduled(fixedRate = 30000)
     public void backupDatabase() {
         try {
             databaseBackupService.backupDatabase();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while backing up database", e);
         }
     }
 
