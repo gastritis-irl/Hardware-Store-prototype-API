@@ -8,6 +8,8 @@ import edu.bbte.idde.bfim2114.springbackend.util.SpecificationFields;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,7 @@ public class HardwareServiceImpl implements HardwareService {
     private final HardwarePartMapper hardwarePartMapper;
 
     @Override
+    @Cacheable(value = "HardwarePart", key = "#partId")
     public Optional<HardwarePart> findById(Long partId) {
 
         return hardwareRepository.findById(partId);
@@ -60,6 +63,7 @@ public class HardwareServiceImpl implements HardwareService {
 
     @Transactional
     @Override
+    @CacheEvict(value = "HardwarePart", key = "#partId", condition = "#partId != null")
     public void delete(Long partId) {
 
         log.info("Deleting HardwarePart by id: {}", partId);
@@ -70,6 +74,7 @@ public class HardwareServiceImpl implements HardwareService {
 
     @Transactional
     @Override
+    @CacheEvict(value = "HardwarePart", key = "#part.id", condition = "#part.id != null")
     public HardwarePart update(HardwarePart part) {
         if (isValid(part)) {
             log.error("Invalid HardwarePart");

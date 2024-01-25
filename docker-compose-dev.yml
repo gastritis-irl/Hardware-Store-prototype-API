@@ -1,4 +1,9 @@
 services:
+#    redis for cahing
+    idde-redis:
+        image: redis:latest
+        ports:
+        - "6379:6379"
     idde-backend:
         build:
           context: .
@@ -12,5 +17,10 @@ services:
         - SPRING_JPA_SHOW_SQL=true
         - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
         - SPRING_JPA_OPEN_IN_VIEW=true
+        - SPRING_CACHE_TYPE=redis
+        - SPRING_REDIS_HOST=idde-redis
+        - SPRING_REDIS_PORT=6379
         ports:
         - "8081:8081"
+        depends_on:
+            -   idde-redis

@@ -8,6 +8,8 @@ import edu.bbte.idde.bfim2114.springbackend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Cacheable(value = "User", key = "#id")
     public User findById(Long id) {
 
         log.info("Finding User by id: {}", id);
@@ -52,6 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(value = "User", key = "#user.id", condition = "#user.id != null")
     public User update(User user) {
 
         log.info("Updating User: {}", user);
@@ -60,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
+    @CacheEvict(value = "User", key = "#id", condition = "#id != null")
     public void delete(Long id) {
 
         log.info("Deleting User by id: {}", id);
@@ -67,6 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(value = "User", key = "#user.id", condition = "#user.id != null")
     public void addHardwarePart(User user, HardwarePart part) {
         log.info("Adding HardwarePart: {} to User: {}", part, user);
         if (user.getHardwareParts() == null) {
@@ -77,6 +83,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(value = "User", key = "#user.id", condition = "#user.id != null")
     public void removeHardwarePart(User user, HardwarePart part) {
         log.info("Removing HardwarePart: {} from User: {}", part, user);
         user.removeHardwarePart(part);
