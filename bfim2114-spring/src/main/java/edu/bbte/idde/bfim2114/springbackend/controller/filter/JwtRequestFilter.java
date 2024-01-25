@@ -1,4 +1,4 @@
-package edu.bbte.idde.bfim2114.springbackend.util;
+package edu.bbte.idde.bfim2114.springbackend.controller.filter;
 
 import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         throws ServletException, IOException {
-        log.info("Request: {} {}", request.getMethod(), request.getRequestURI());
+        //log.info("Request: {} {}", request.getMethod(), request.getRequestURI());
 
         final String authorizationHeader = request.getHeader("Authorization");
 

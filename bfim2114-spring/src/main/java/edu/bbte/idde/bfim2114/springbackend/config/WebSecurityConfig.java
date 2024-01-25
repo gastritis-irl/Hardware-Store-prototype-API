@@ -1,8 +1,11 @@
 package edu.bbte.idde.bfim2114.springbackend.config;
 
+import edu.bbte.idde.bfim2114.springbackend.controller.filter.JwtRequestFilter;
+import edu.bbte.idde.bfim2114.springbackend.controller.intercepor.LoggingInterceptor;
+import edu.bbte.idde.bfim2114.springbackend.controller.intercepor.MetricsInterceptor;
+import edu.bbte.idde.bfim2114.springbackend.controller.intercepor.RateLimitingInterceptor;
 import edu.bbte.idde.bfim2114.springbackend.service.JwtService;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
-import edu.bbte.idde.bfim2114.springbackend.util.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +30,21 @@ public class WebSecurityConfig {
     private final JwtService jwtService;
 
     private final PasswordEncoder passwordEncoder;
+
+    @Bean
+    public RateLimitingInterceptor rateLimitingInterceptor() {
+        return new RateLimitingInterceptor();
+    }
+
+    @Bean
+    public LoggingInterceptor loggingInterceptor() {
+        return new LoggingInterceptor();
+    }
+
+    @Bean
+    public MetricsInterceptor metricsInterceptor() {
+        return new MetricsInterceptor();
+    }
 
     @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     @Bean
@@ -70,5 +88,4 @@ public class WebSecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
-
 }

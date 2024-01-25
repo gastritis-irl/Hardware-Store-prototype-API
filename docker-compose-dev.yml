@@ -5,7 +5,7 @@ services:
           dockerfile: Dockerfile
         restart: unless-stopped
         environment:
-        - SPRING_PROFILES_ACTIVE=data-gen, dev
+        - SPRING_PROFILES_ACTIVE=data-gen,dev
         - SERVER_PORT=8081
         - SPRING_DATASOURCE_URL=jdbc:h2:mem:test
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
