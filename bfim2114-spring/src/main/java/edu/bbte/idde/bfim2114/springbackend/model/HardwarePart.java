@@ -10,7 +10,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "hardware_parts")
+@Table(name = "hardware_parts_spring")
 public class HardwarePart extends BaseEntity {
 
     @Column(name = "name", nullable = false, length = 50)
@@ -31,5 +31,6 @@ public class HardwarePart extends BaseEntity {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
 }
