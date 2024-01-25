@@ -11,7 +11,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "users")
+@Table(name = "users_spring")
 @NoArgsConstructor
 public class User extends BaseEntity {
 
@@ -26,6 +26,7 @@ public class User extends BaseEntity {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private Collection<HardwarePart> hardwareParts;
 
     public void addHardwarePart(HardwarePart hardwarePart) {
