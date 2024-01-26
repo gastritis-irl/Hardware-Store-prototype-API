@@ -44,10 +44,9 @@ public class HardwareServiceImpl implements HardwareService {
             if (part == null) {
                 return false;
             }
-            Long userId = part.getUserId();
 
-            return userService.existsById(userId) && part.getName() != null
-                    && !part.getName().isEmpty();
+            return part.getName() != null
+                && !part.getName().isEmpty();
         } catch (RepositoryException e) {
             log.error("Error while checking if HardwarePart is valid: {}", part, e);
             throw new ServiceException("Error while checking if HardwarePart is valid", e);

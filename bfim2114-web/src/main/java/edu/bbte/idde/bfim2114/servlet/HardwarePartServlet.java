@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.util.Collection;
 
 @Slf4j
-@WebServlet("/api/hardwareparts")
+@WebServlet("/api/hardwarepart")
 @RequiredArgsConstructor
 public class HardwarePartServlet extends HttpServlet {
 
@@ -88,8 +88,7 @@ public class HardwarePartServlet extends HttpServlet {
                 log.info("Created HardwarePart with id: {}", createdPart.getId());
             } else {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.print("{\"error\":\"Invalid HardwarePart data\"}");
-                log.error("Invalid HardwarePart data provided");
+
             }
         } catch (JsonIOException | JsonSyntaxException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

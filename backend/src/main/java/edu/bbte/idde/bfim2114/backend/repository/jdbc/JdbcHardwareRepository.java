@@ -91,7 +91,7 @@ public class JdbcHardwareRepository implements HardwareRepository {
     @Override
     public HardwarePart create(HardwarePart entity) {
         String sql = "INSERT INTO hardware_parts"
-                + "(name, manufacturer, category, price, description, userId) VALUES(?, ?, ?, ?, ?, ?)";
+                + "(name, manufacturer, category, price, description) VALUES(?, ?, ?, ?, ?)";
         try (Connection conn = connectionManager.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             prepareThePrepared(entity, preparedStatement);
@@ -114,13 +114,12 @@ public class JdbcHardwareRepository implements HardwareRepository {
         preparedStatement.setString(3, entity.getCategory());
         preparedStatement.setDouble(4, entity.getPrice());
         preparedStatement.setString(5, entity.getDescription());
-        preparedStatement.setLong(6, entity.getUserId());
     }
 
     @Override
     public HardwarePart update(HardwarePart entity) {
         String sql = "UPDATE hardware_parts SET name=?, manufacturer=?, "
-                + "category=?, price=?, description=?, userId=? WHERE id=?";
+                + "category=?, price=?, description=?WHERE id=?";
         try (Connection conn = connectionManager.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             prepareThePrepared(entity, preparedStatement);
@@ -141,7 +140,6 @@ public class JdbcHardwareRepository implements HardwareRepository {
         part.setCategory(resultSet.getString(4));
         part.setPrice(resultSet.getDouble(5));
         part.setDescription(resultSet.getString(6));
-        part.setUserId(resultSet.getLong(7));
         return part;
     }
 }

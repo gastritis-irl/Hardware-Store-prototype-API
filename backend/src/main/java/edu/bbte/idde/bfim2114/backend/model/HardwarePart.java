@@ -14,5 +14,4 @@ public class HardwarePart extends BaseEntity {
     private String category;
     private Double price;
     private String description;
-    private Long userId;
 }

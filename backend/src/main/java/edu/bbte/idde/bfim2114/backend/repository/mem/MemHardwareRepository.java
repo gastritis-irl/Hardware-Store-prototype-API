@@ -37,11 +37,6 @@ public final class MemHardwareRepository implements HardwareRepository {
 
         long id = currentId.getAndIncrement();
         part.setId(id);
-        Long userId = part.getUserId();
-        if (userRepository.findById(userId) == null) {
-            log.error("Failed to create. User with ID {} not found.", userId);
-            throw new IllegalArgumentException("User with the given ID does not exist");
-        }
         dataStore.put(id, part);
         log.info("HardwarePart with ID {} created.", id);
         return part;
@@ -75,13 +70,6 @@ public final class MemHardwareRepository implements HardwareRepository {
     @Override
     public HardwarePart update(HardwarePart part) {
         if (dataStore.containsKey(part.getId())) {
-
-            Long userId = part.getUserId();
-            if (userRepository.findById(userId) == null) {
-                log.error("Failed to update. User with ID {} not found.", userId);
-                throw new IllegalArgumentException("User with the given ID does not exist");
-            }
-
             dataStore.put(part.getId(), part);
             log.info("HardwarePart with ID {} updated.", part.getId());
             return part;

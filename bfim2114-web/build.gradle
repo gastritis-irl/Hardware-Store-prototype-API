@@ -32,11 +32,10 @@ tasks.register('deploy', Copy) {
 
     doLast {
         def setenvFile = file("${catalinaHome}/bin/setenv.bat")
-        setenvFile.write("set \"CATALINA_OPTS=-Dprofile=prod -Dinitdb=true\"\n")
+        setenvFile.write("set \"CATALINA_OPTS=-Dprofile=prod -Dinitdb=false\"\n")
     }
 }
 
 tasks.register('undeploy', Delete) {
     delete "${catalinaHome}/webapps/bfim2114-web-1.0-SNAPSHOT.war"
 }
-
