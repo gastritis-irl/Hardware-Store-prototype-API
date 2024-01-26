@@ -6,6 +6,7 @@ import edu.bbte.idde.bfim2114.springbackend.mapper.UserMapper;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.model.User;
 import edu.bbte.idde.bfim2114.springbackend.service.UserService;
+import edu.bbte.idde.bfim2114.springbackend.util.DeleteHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final DeleteHandler deleteHandler;
 
     @GetMapping("/{username}")
     public ResponseEntity<UserOutDTO> getUserByUsername(@PathVariable String username) {
@@ -46,10 +48,11 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         log.info("DELETE: /api/users/{}", id);
+        ResponseEntity<?> res = deleteHandler.handleDeleteMissing(userService.findById(id) == null);
         userService.delete(id);
-        return ResponseEntity.noContent().build();
+        return res;
     }
 
     @GetMapping("/{id}/hardware")

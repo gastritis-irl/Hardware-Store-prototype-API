@@ -5,6 +5,7 @@ import edu.bbte.idde.bfim2114.springbackend.dto.HardwarePartOutDTO;
 import edu.bbte.idde.bfim2114.springbackend.mapper.HardwarePartMapper;
 import edu.bbte.idde.bfim2114.springbackend.model.HardwarePart;
 import edu.bbte.idde.bfim2114.springbackend.service.HardwareService;
+import edu.bbte.idde.bfim2114.springbackend.util.DeleteHandler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class HardwareController {
 
     private final HardwareService hardwareService;
+    private final DeleteHandler deleteHandler;
     private final HardwarePartMapper hardwarePartMapper;
 
     @GetMapping
@@ -65,9 +67,11 @@ public class HardwareController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHardwarePart(@PathVariable Long id) {
+    public ResponseEntity<?> deleteHardwarePart(@PathVariable Long id) {
         log.info("DELETE: /api/hardware/{}", id);
+        log.info("{}", hardwareService.findById(id));
+        ResponseEntity<?> res= deleteHandler.handleDeleteMissing(hardwareService.findById(id).isEmpty());
         hardwareService.delete(id);
-        return ResponseEntity.noContent().build();
+        return res;
     }
 }
