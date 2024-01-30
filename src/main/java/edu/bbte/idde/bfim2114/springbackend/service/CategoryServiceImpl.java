@@ -6,8 +6,6 @@ import edu.bbte.idde.bfim2114.springbackend.repository.CategoryRepository;
 import edu.bbte.idde.bfim2114.springbackend.repository.HardwareRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,6 @@ public class CategoryServiceImpl implements CategoryService {
     private final HardwareRepository hardwareRepository;
 
     @Override
-    @Cacheable(value = "Category", key = "#id")
     public Category findById(Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
@@ -34,13 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @CacheEvict(value = "Category", key = "#category.id", condition = "#category.id != null")
     public Category update(Category category) {
         return categoryRepository.save(category);
     }
 
     @Override
-    @CacheEvict(value = "Category", key = "#id", condition = "#id != null")
     public void delete(Long id) {
         categoryRepository.deleteById(id);
     }
@@ -51,7 +46,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-
     public Collection<HardwarePart> findAllPartsByCategoryId(Long categoryId) {
         return hardwareRepository.findAllByCategoryId(categoryId);
     }

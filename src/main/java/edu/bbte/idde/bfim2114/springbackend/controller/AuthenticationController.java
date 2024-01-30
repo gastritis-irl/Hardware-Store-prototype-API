@@ -31,7 +31,6 @@ public class AuthenticationController {
 
     @PostMapping("/api/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO registerDTO) {
-        log.info("POST: /api/register");
         User user = userService.registerUser(registerDTO);
         final ResponseEntity<?> jwt = getResponseEntity(user);
         if (jwt != null) {
@@ -42,7 +41,6 @@ public class AuthenticationController {
 
     @PostMapping("/api/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        log.info("POST: /api/login");
         User user = userService.validateUser(loginDTO);
         final ResponseEntity<?> jwt = getResponseEntity(user);
         if (jwt != null) {
@@ -73,12 +71,12 @@ public class AuthenticationController {
         responseData.put("email", userDetails.getUsername());
         responseData.put("expirationDate", jwtService.extractExpiration(jwt));
         responseData.put("id", user.getId());
+        responseData.put("themeId", user.getThemeId());
         return ResponseEntity.ok().body(responseData);
     }
 
     @PostMapping("/api/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String token) {
-        log.info("POST: /api/refresh-token");
         String username = jwtService.extractUsername(token.substring(7));
         User user = userService.findByUsername(username);
         if (user == null) {
@@ -100,13 +98,8 @@ public class AuthenticationController {
 
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(@RequestHeader("Authorization") String token) {
-        log.info("POST: /api/logout");
-
-        // jwtUtil.invalidateToken(token.substring(7));
-
         String username = jwtService.extractUsername(token.substring(7));
         log.info("User " + username + " logged out.");
-
 
         return ResponseEntity.noContent().build();
     }

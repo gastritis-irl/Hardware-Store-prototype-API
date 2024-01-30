@@ -76,6 +76,9 @@ public class WebSecurityConfig {
                     HttpMethod.POST, "/api/logout/**"
                 ).hasAnyRole("USER", "ADMIN")
                 .requestMatchers(
+                    HttpMethod.POST, "/api/user/**"
+                ).hasAnyRole("USER", "ADMIN")
+                .requestMatchers(
                     "/**"
                 ).hasRole("ADMIN")
                 .anyRequest().authenticated(

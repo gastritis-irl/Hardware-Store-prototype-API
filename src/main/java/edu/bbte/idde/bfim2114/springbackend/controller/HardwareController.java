@@ -76,15 +76,12 @@ public class HardwareController {
     @PostMapping
     public ResponseEntity<HardwarePartOutDTO> createHardwarePart(@Valid @RequestBody
                                                                  HardwarePartInDTO hardwarePartInDTO) {
-        log.info("POST: /api/hardware");
         HardwarePart hardwarePart = hardwarePartMapper.dtoToHardwarePart(hardwarePartInDTO);
-        log.info("{}", hardwarePart);
         return ResponseEntity.ok(hardwarePartMapper.hardwarePartToDTO(hardwareService.create(hardwarePart)));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<HardwarePartOutDTO> getHardwarePartById(@PathVariable Long id) {
-        log.info("GET: /api/hardware/{}", id);
         if (hardwareService.findById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -96,7 +93,6 @@ public class HardwareController {
         @PathVariable Long id,
         @Valid @RequestBody HardwarePartInDTO hardwarePartInDTO
     ) {
-        log.info("PUT: /api/hardware/{}", id);
         HardwarePart hardwarePart = hardwarePartMapper.dtoToHardwarePart(hardwarePartInDTO);
         hardwarePart.setId(id);
         HardwarePart updatedHardwarePart = hardwareService.update(hardwarePart);
@@ -108,7 +104,6 @@ public class HardwareController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHardwarePart(@PathVariable Long id) {
-        log.info("DELETE: /api/hardware/{}", id);
         hardwareService.delete(id);
         return ResponseEntity.noContent().build();
     }

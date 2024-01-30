@@ -38,9 +38,9 @@ public class DataGen {
         log.info("Generating data");
 
         User user = new User("user@user", BCrypt.hashpw("password",
-            BCrypt.gensalt()), "USER", new ArrayList<>());
+            BCrypt.gensalt()), "USER", 1L, new ArrayList<>());
         User admin = new User("admin@admin", BCrypt.hashpw("password",
-            BCrypt.gensalt()), "ADMIN", new ArrayList<>());
+            BCrypt.gensalt()), "ADMIN", 1L, new ArrayList<>());
         userService.create(user);
         userService.create(admin);
 
@@ -72,7 +72,6 @@ public class DataGen {
                 userService.findById(((Number) partData.get("userId")).longValue()),
                 category
             );
-            log.warn("JSON HardwarePart Category: {}", hardwarePart.getCategory());
             hardwareService.create(hardwarePart);
         }
 

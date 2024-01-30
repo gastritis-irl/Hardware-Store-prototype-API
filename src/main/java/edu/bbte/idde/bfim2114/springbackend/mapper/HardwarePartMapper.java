@@ -49,4 +49,18 @@ public abstract class HardwarePartMapper {
             entity.setCategory(categoryService.findByName(dto.getCategoryName()));
         }
     }
+
+    @AfterMapping
+    protected void handleEntityToDtoMapping(HardwarePart entity, @MappingTarget HardwarePartOutDTO dto) {
+        if (entity.getUser() == null) {
+            dto.setUserId(null);
+        } else {
+            dto.setUserId(entity.getUser().getId());
+        }
+        if (entity.getCategory() == null) {
+            dto.setCategoryName(null);
+        } else {
+            dto.setCategoryName(entity.getCategory().getName());
+        }
+    }
 }

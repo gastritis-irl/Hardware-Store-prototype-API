@@ -25,6 +25,9 @@ public class User extends BaseEntity implements Serializable {
     @Column(name = "role", nullable = false, length = 50)
     private String role;
 
+    @Column(name = "theme_id", nullable = false)
+    private Long themeId;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @ToString.Exclude

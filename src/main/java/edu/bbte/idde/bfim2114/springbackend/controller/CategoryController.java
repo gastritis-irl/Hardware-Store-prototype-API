@@ -47,7 +47,7 @@ public class CategoryController {
     ) {
         log.info("GET: /api/category");
         int page = pageNumber.orElse(1) - 1;
-        int size = pageSize.orElse(12);
+        int size = pageSize.orElse(14);
         String sort = sortBy.orElse("id");
         Sort.Direction dir = "ASC".equalsIgnoreCase(direction.orElse("ASC")) ? Sort.Direction.ASC : Sort.Direction.DESC;
 

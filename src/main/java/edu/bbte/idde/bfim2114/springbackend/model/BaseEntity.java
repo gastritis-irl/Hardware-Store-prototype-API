@@ -2,8 +2,8 @@ package edu.bbte.idde.bfim2114.springbackend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -15,13 +15,11 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
     protected Date createdDate;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "updated_date")
-    @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedDate;
 }

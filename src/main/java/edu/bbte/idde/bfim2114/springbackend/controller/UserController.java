@@ -1,5 +1,6 @@
 package edu.bbte.idde.bfim2114.springbackend.controller;
 
+import edu.bbte.idde.bfim2114.springbackend.dto.ThemeDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.UserInDTO;
 import edu.bbte.idde.bfim2114.springbackend.dto.UserOutDTO;
 import edu.bbte.idde.bfim2114.springbackend.mapper.UserMapper;
@@ -9,6 +10,7 @@ import edu.bbte.idde.bfim2114.springbackend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +59,19 @@ public class UserController {
         log.info("GET: /api/users/{}/hardware", id);
         Collection<HardwarePart> hardwareParts = userService.getHardwareParts(userService.findById(id));
         return ResponseEntity.ok(hardwareParts);
+    }
+
+    @PostMapping("/{id}/theme")
+    public ResponseEntity<Void> updateTheme(@RequestBody ThemeDTO themeDTO, @PathVariable Long id) {
+        log.info("Theme: {}", themeDTO.getThemeId());
+        User user = userService.findById(id);
+        log.info("User: {}", user);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            user.setThemeId(themeDTO.getThemeId());
+            userService.update(user);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 }
