@@ -12,4 +12,7 @@ public class UserOutDTO implements Serializable {
     private Date createdAt;
     private Date updatedAt;
     private String email;
+    private String role;
+    private Long themeId;
+    private String token;
 }
